@@ -42,6 +42,10 @@ Boundary Block 5: 0.152145 (p4 - p5) + 0.0 + 0.0
 
 ### 2D Reservoir
 
+<div>
+<img src="https://user-images.githubusercontent.com/51282928/88476740-0f167d00-cf65-11ea-9681-535449fd70fa.png" width="300"/>
+</div>
+
 Result:
 
 ```
