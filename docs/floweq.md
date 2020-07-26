@@ -19,6 +19,7 @@ Let's start from 1D, then 2D, and finally advance to 3D.
 **Flow equation**
 
 ![image](https://user-images.githubusercontent.com/51282928/88473162-e2eb0400-cf44-11ea-998d-19935257562f.png)
+> System of flow in 1D reservoir
 
 Each block has a flow equations consisting of **3 terms** in the left-hand side (LHS). **The first 2 terms** are the flow terms (flow in the block), and the **last term** is the source term. 
 
@@ -46,6 +47,8 @@ Boundary Block 5: 0.152145 (p4 - p5) + 0.0 + 0.0
 <img src="https://user-images.githubusercontent.com/51282928/88476740-0f167d00-cf65-11ea-9681-535449fd70fa.png" width="300"/>
 </div>
 
+> System of flow in 2D reservoir
+
 Result:
 
 ```
@@ -72,6 +75,8 @@ Interior block (2, 2): 18.257399999999997 (p(1, 2) - p(2, 2)) + 18.2573999999999
 <div>
 <img src="https://user-images.githubusercontent.com/51282928/88476192-c0ff7a80-cf60-11ea-8492-54fccd1aebc7.png" width="300"/>
 </div>
+
+> System of flow in 3D reservoir
 
 Result:
 
