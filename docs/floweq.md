@@ -65,6 +65,10 @@ Interior block (2, 2): 18.257399999999997 (p(1, 2) - p(2, 2)) + 18.2573999999999
 
 ### 3D Reservoir
 
+<div>
+<img src="https://user-images.githubusercontent.com/51282928/88476192-c0ff7a80-cf60-11ea-8492-54fccd1aebc7.png" width="300"/>
+</div>
+
 Result:
 
 ```
