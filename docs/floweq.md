@@ -8,7 +8,7 @@ Before advancing further, read about **flow equation** [here](https://github.com
 
 Let's start from 1D, then 2D, and finally advance to 3D. 
 
-### 1D flow equations
+### 1D Reservoir
 
 **Block notation**. A 1D reservoir grid blocks are numbered as 1, 2, 3, ..., `n`, with `n` is the number of grid blocks.
 
@@ -38,4 +38,27 @@ Interior Block 2: 0.152145 (p1 - p2) + 0.152145 (p3 - p2) + 0.0
 Interior Block 3: 0.152145 (p2 - p3) + 0.152145 (p4 - p3) + 0.0
 Interior Block 4: 0.152145 (p3 - p4) + 0.152145 (p5 - p4) + -150.0
 Boundary Block 5: 0.152145 (p4 - p5) + 0.0 + 0.0
+```
+
+### 2D Reservoir
+
+Result:
+
+```
+southwest corner block (1, 1)
+Boundary Block (1, 1): 18.257399999999997 (p(2, 1) - p(1, 1)) + 0.0 + 10.330833333333333 (p(1, 2) - p(1, 1)) + 20.661666666666665 (3000 - p(1, 1)) + 0 
+
+west block (1, 2)
+Boundary Block (1, 2): 18.257399999999997 (p(2, 2) - p(1, 2)) + 0.0 + 10.330833333333333 (p(1, 3) - p(1, 2)) + 10.330833333333333 (p(1, 1) - p(1, 2)) + 0 
+
+northwest corner block (1, 3)
+Boundary Block (1, 3): 18.257399999999997 (p(2, 3) - p(1, 3)) + 0.0 + -125.0 + 10.330833333333333 (p(1, 2) - p(1, 3)) + 0 
+
+south block (2, 1)
+Boundary block (2, 1): 18.257399999999997 (p(1, 1) - p(2, 1)) + 18.257399999999997 (p(3, 1) - p(2, 1)) + 10.330833333333333 (p(2, 2) - p(2, 1)) + 20.661666666666665 (3000 - p(2, 1)) + 0 
+
+interior block (2, 2)
+Interior block (2, 2): 18.257399999999997 (p(1, 2) - p(2, 2)) + 18.257399999999997 (p(3, 2) - p(2, 2)) + 10.330833333333333 (p(2, 3) - p(2, 2)) + 10.330833333333333 (p(2, 1) - p(2, 2)) + 0 
+
+...
 ```
