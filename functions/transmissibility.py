@@ -15,7 +15,7 @@ def trans_r_plus(dz_now, dz_next, dtheta, alpha_tg, kh_now, kh_next, mu, B):
   Calculate transmissibility of cylindrical grid in r+ direction
   """
   # transmissibility geometric factor
-  G_trans_r_plus = (.001127 * dtheta) / (np.log((alpa_tg - 1) / np.log(alpha_tg)) / (dz_now * kh_now) + np.log(alpha_tg * np.log(alpha_tg) / (alpha_tg - 1)) / (dz_next * kh_next))
+  G_trans_r_plus = (.001127 * dtheta) / (np.log((alpha_tg - 1) / np.log(alpha_tg)) / (dz_now * kh_now) + np.log(alpha_tg * np.log(alpha_tg) / (alpha_tg - 1)) / (dz_next * kh_next))
   # calculate transmissibility
   T_r_plus = G_trans_r_plus / (mu * B)
   return T_r_plus
