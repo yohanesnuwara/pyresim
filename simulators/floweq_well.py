@@ -6,6 +6,7 @@ Simulation in Cylindrical (Well-represented) Reservoir Grids in 2D
 """
 
 from boundary import *
+from transmissibility import *
 
 " Inputs "
 
