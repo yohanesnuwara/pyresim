@@ -17,7 +17,7 @@ This simulator is built based on explanations in *Petroleum Reservoir Simulation
 
 ## Cases
 
-### Case 1. 1D reservoir, homogeneous, single-phase
+### Case 1. 1D rectangular reservoir, homogeneous, single-phase
 
 <div>
 <img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="500"/>
@@ -31,7 +31,7 @@ produces oil at a rate of 150 STB/D.
 
 #### Using [`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py) to produce the flow equations in each of the grid blocks
 
-### Case 2. 2D reservoir, homogeneous, single-phase
+### Case 2. 2D rectangular reservoir, homogeneous, single-phase
 
 <div>
 <img src="https://user-images.githubusercontent.com/51282928/88287885-28c58380-cd1d-11ea-915a-80a7bae7df72.png" width="500"/>
@@ -47,7 +47,7 @@ north boundary at a rate of 500 STB/D.
 
 #### Using [`floweq_2d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_2d.py) to produce the flow equations in each of the grid blocks
 
-### Case 2. 3D reservoir, homogeneous, single-phase
+### Case 3. 3D rectangular reservoir, homogeneous, single-phase
 
 <div>
 <img src="https://user-images.githubusercontent.com/51282928/88464930-d638c280-cee8-11ea-8014-59c010afd95b.png" width="500"/>
@@ -59,3 +59,20 @@ The FVF, density, and viscosity of the flowing fluid are 1.0 RB/STB, 55 Ibm/ft3,
 and 2 cp, respectively.
 
 #### Using [`floweq_3d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_3d.py) to produce the flow equations in each of the grid blocks
+
+### Case 4. 2D cylindrical reservoir (well in the middle), homogeneous, varying size in radial direction
+
+<div>
+<img src="https://user-images.githubusercontent.com/51282928/88837303-4d7c9800-d202-11ea-8ee4-5221e8e1e298.png" width="500"/>
+</div>
+
+> A 0.5-ft diameter water well is located in 20-acre spacing. The
+reservoir thickness, horizontal permeability, and porosity are 30 ft, 150 md, and
+0.23, respectively. The (kv/kh) for this reservoir is estimated from core data as
+0.30. The flowing fluid has a density, FVF, and viscosity of 62.4 lbm/ft3, 1 RB/B, and
+0.5 cp, respectively. The reservoir external boundary in the radial direction is a no flow
+boundary, and the well is completed in the top 20 ft only and produces at a rate
+of 2000 B/D. The reservoir bottom boundary is subject to influx such that the
+boundary is kept at 4000 psia. The reservoir top boundary is sealed to flow.
+Assuming the reservoir can be simulated using 3 equal gridblocks in the vertical
+direction and 4 gridblocks in the radial direction.
