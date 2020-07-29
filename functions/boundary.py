@@ -36,6 +36,9 @@ def constant_pressure_bc1d(no_block, p_b, dy, dz, kx, dx, mu, B):
   where: 0.757 is the calculated transmissibility, 3000 is the p_b, and (2,1)
   is the no_block (boundary location)
   """
+  
+  import numpy as np
+  
   Ax = dy * dz
   T = .001127 * (kx * Ax) / (mu * B * 0.5 * dx)
   qsc = '{} ({} - p{})'.format(T, p_b, no_block)
@@ -66,7 +69,9 @@ def constant_pressuregrad_bc1d(p_grad, dy, dz, kx, mu, B):
   e.g.: '100.5'
   where: 100.5 is the calculated flow rate 
   """
-
+  
+  import numpy as np
+  
   Ax = dy * dz
   qsc = '{}'.format(np.round((.001127 * (kx * Ax) / (mu * B)) * (p_grad - 0), 5)) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
   return(qsc)
