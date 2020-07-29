@@ -117,3 +117,50 @@ def constant_rate_bc2d(T, q_b, no_blocks_shared):
   """
   qsc = T / (no_blocks_shared * T) * q_b
   return(qsc)
+
+def constant_pressure_well2d(bound_loc, no_block, p_b, h, d_elev, kz, dz, dv, mu, B, rho):
+  """
+  Flow expression for 2D constant pressure boundary block in well 
+
+  Input:
+
+  bound_loc = location of boundary. Specify as 'west', 'east', 'south', 'north', 'bottom', or 'upper'
+  no_block = boundary block location
+  p_b = pressure at the boundary
+  h = reservoir thickness
+  d_elev = grid block elevation
+  kz = vertical permeability
+  dz 
+  dv = grid block bulk volume
+  mu = fluid viscosity in boundary block
+  B = fluid FVF in boundary block
+  rho = fluid density
+
+  Output:
+
+  qsc = Flow expression as string 
+  
+  e.g.: '0.757 (3000 - p(2,1) - 50)')  
+  where: 0.757 is the calculated transmissibility, 3000 is the p_b, (2,1)
+  is the no_block (boundary location), 50 is the potential term (γ * ∂Z/∂z)
+  """  
+  Az = dv / dz
+  T = .001127 * (kz * Az) / (mu * B * 0.5 * dz)
+
+  if bound_loc=='bottom':
+    Z = h - d_elev
+    gamma = .21584E-3 * rho * 32.174
+    Z_gamma = Z * gamma
+    qsc = '{} ({} - p{} - ({}))'.format(T, p_b, no_block, Z_gamma)
+  if bound_loc=='upper':
+    Z = 0 - d_elev
+    gamma = .21584E-3 * rho * 32.174
+    Z_gamma = Z * gamma
+    qsc = '{} ({} - p{} - ({}))'.format(T, p_b, no_block, Z_gamma)
+  if bound_loc == 'west' or bound_loc == 'south':
+    # characterize as Left boundary
+    qsc = '{} ({} - p{})'.format(T, p_b, no_block) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
+  if bound_loc == 'east' or bound_loc == 'north':
+    # characterize as Right boundary
+    qsc = '{} ({} - p{})'.format(T, p_b, no_block) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
+  return(qsc)
