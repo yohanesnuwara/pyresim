@@ -1,5 +1,9 @@
+"""
+Simulation in 1D Rectangular Reservoir Grids 
+
 @author: Yohanes Nuwara
 @email: ign.nuwara97@gmail.com
+"""
 
 # blocks location
 block = np.arange(1, 5+1)
