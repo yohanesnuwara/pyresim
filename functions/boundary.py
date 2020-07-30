@@ -76,6 +76,44 @@ def constant_pressuregrad_bc1d(p_grad, dy, dz, kx, mu, B):
   qsc = '{}'.format(np.round((.001127 * (kx * Ax) / (mu * B)) * (p_grad - 0), 5)) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
   return(qsc)
 
+def constant_pressuregrad_bc2d(bound_loc, p_grad, dy, dz, kx, mu, B):
+  """
+  Flow expression for 1D, 2D constant pressure gradient boundary block
+
+  Input:
+
+  bound_loc = location of boundary. Specify as 'west', 'east', 'south', 'north', 'bottom', or 'upper'
+  p_grad = pressure gradient at the boundary
+  dy, dz = these two can be interchangeable depends on the boundary location
+  * if the boundary block receives constant pressure boundary in y direction: input as dx, dz
+  * if the boundary block receives constant pressure boundary in x direction: input as dy, dz
+  * if the boundary block receives constant pressure boundary in z direction: input as dx, dy
+  kx = can be interchangeable depends on the boundary location
+  * if the boundary block receives constant pressure boundary in y direction: input as ky
+  * if the boundary block receives constant pressure boundary in x direction: input as kx
+  * if the boundary block receives constant pressure boundary in z direction: input as kz
+  mu = fluid viscosity in boundary block
+  B = fluid FVF in boundary block
+
+  Output:
+
+  qsc = Flow expression as string 
+  
+  e.g.: '100.5'
+  where: 100.5 is the calculated flow rate 
+  """
+
+  import numpy as np
+
+  Ax = dy * dz
+  if bound_loc == 'bottom' or bound_loc == 'south' or bound_loc == 'west':
+    # characterize as Left boundary
+    qsc = '{}'.format(np.round(-(.001127 * (kx * Ax) / (mu * B)) * (p_grad - 0), 5)) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
+  if bound_loc == 'upper' or bound_loc == 'north' or bound_loc == 'east':
+    # characterize as Right boundary
+    qsc = '{}'.format(np.round((.001127 * (kx * Ax) / (mu * B)) * (p_grad - 0), 5)) # Eq 4.45, zero (p_grad - 0) because Z1=Z2
+  return(qsc)
+
 def constant_rate_bc1d(q_b):
   """
   Flow expression for 1D (only) constant rate gradient boundary block
