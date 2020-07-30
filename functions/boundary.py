@@ -7,7 +7,46 @@ Codes for boundary conditions
 
 def constant_pressure_bc1d(no_block, p_b, dy, dz, kx, dx, mu, B):
   """
-  Flow expression for 1D, 2D, 3D constant pressure boundary block
+  Flow expression for 1D constant pressure boundary block
+
+  Input:
+
+  no_block = boundary block location
+  p_b = pressure at the boundary
+  dy, dz = these two can be interchangeable depends on the boundary location
+  * if the boundary block receives constant pressure boundary in y direction: input as dx, dz
+  * if the boundary block receives constant pressure boundary in x direction: input as dy, dz
+  * if the boundary block receives constant pressure boundary in z direction: input as dx, dy
+  kx = can be interchangeable depends on the boundary location
+  * if the boundary block receives constant pressure boundary in y direction: input as ky
+  * if the boundary block receives constant pressure boundary in x direction: input as kx
+  * if the boundary block receives constant pressure boundary in z direction: input as kz
+  dx = can be interchangeable depends on the boundary location
+  * if the boundary block receives constant pressure boundary in y direction: input as dy
+  * if the boundary block receives constant pressure boundary in x direction: input as dx
+  * if the boundary block receives constant pressure boundary in z direction: input as dz
+  mu = fluid viscosity in boundary block
+  B = fluid FVF in boundary block
+
+  Output:
+
+  qsc = Flow expression as string 
+  
+  e.g.: '0.757 (3000 - p(2,1))')  
+  where: 0.757 is the calculated transmissibility, 3000 is the p_b, and (2,1)
+  is the no_block (boundary location)
+  """
+  
+  import numpy as np
+  
+  Ax = dy * dz
+  T = .001127 * (kx * Ax) / (mu * B * 0.5 * dx)
+  qsc = '{} ({} - p{})'.format(T, p_b, no_block)
+  return(qsc)
+
+def constant_pressure_bc2d(no_block, p_b, dy, dz, kx, dx, mu, B):
+  """
+  Flow expression for 2D constant pressure boundary block
 
   Input:
 
@@ -46,7 +85,7 @@ def constant_pressure_bc1d(no_block, p_b, dy, dz, kx, dx, mu, B):
 
 def constant_pressuregrad_bc1d(p_grad, dy, dz, kx, mu, B):
   """
-  Flow expression for 1D, 2D, 3D constant pressure gradient boundary block
+  Flow expression for 1D constant pressure gradient boundary block
 
   Input:
 
@@ -78,7 +117,7 @@ def constant_pressuregrad_bc1d(p_grad, dy, dz, kx, mu, B):
 
 def constant_pressuregrad_bc2d(bound_loc, p_grad, dy, dz, kx, mu, B):
   """
-  Flow expression for 1D, 2D constant pressure gradient boundary block
+  Flow expression for 2D constant pressure gradient boundary block
 
   Input:
 
@@ -116,7 +155,7 @@ def constant_pressuregrad_bc2d(bound_loc, p_grad, dy, dz, kx, mu, B):
 
 def constant_rate_bc1d(q_b):
   """
-  Flow expression for 1D (only) constant rate gradient boundary block
+  Flow expression for 1D constant rate gradient boundary block
   (either no flow or specified rate)
 
   Input:
@@ -137,7 +176,7 @@ def constant_rate_bc1d(q_b):
 
 def constant_rate_bc2d(T, q_b, no_blocks_shared):
   """
-  Flow expression for 2D, 3D constant pressure boundary block
+  Flow expression for 2D constant pressure boundary block
   (either no flow or specified rate)
 
   Input:
