@@ -1,3 +1,10 @@
+"""
+Simulation in 2D Rectangular Reservoir Grids
+
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 xi = 4; yi = 3 # number of blocks in x and y
 
 # create block coordinates (Engineering Notation convention in Abou-Kassem)
