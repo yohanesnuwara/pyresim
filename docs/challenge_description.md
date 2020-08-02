@@ -22,3 +22,19 @@
 ![image](https://user-images.githubusercontent.com/51282928/89122492-bbbaa680-d4f1-11ea-8f68-a138b7e542d2.png)
 
 ![image](https://user-images.githubusercontent.com/51282928/89122510-d8ef7500-d4f1-11ea-8343-6073203b5b12.png)
+
+## Single-phase simulation
+
+### Incompressible fluid
+
+![image](https://user-images.githubusercontent.com/51282928/89125151-866c8380-d506-11ea-81ff-31229223f94d.png)
+
+### Slightly-compressible fluid
+
+![image](https://user-images.githubusercontent.com/51282928/89125176-b4ea5e80-d506-11ea-85d4-e884747f01b6.png)
+
+![image](https://user-images.githubusercontent.com/51282928/89125219-0eeb2400-d507-11ea-958e-82314211e606.png)
+
+### Compressible fluid
+
+![image](https://user-images.githubusercontent.com/51282928/89125237-3c37d200-d507-11ea-9a5a-a9c2610d732b.png)
