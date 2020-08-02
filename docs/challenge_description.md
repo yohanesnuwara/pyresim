@@ -6,6 +6,8 @@
   * Slightly compressible fluid
   * Compressible fluid
 * Multi-phase simulation
+  * Three-phase simulation: oil-water-gas production
+  * Two-phase simulation: water injection into oil
 
 ## General info
 
@@ -38,3 +40,17 @@
 ### Compressible fluid
 
 ![image](https://user-images.githubusercontent.com/51282928/89125237-3c37d200-d507-11ea-9a5a-a9c2610d732b.png)
+
+## Multi-phase simulation
+
+### Three-phase (oil-water-gas)
+
+![image](https://user-images.githubusercontent.com/51282928/89125734-bf0e5c00-d50a-11ea-8a10-f840e5e8879b.png)
+
+![image](https://user-images.githubusercontent.com/51282928/89125754-df3e1b00-d50a-11ea-868d-818462fbe593.png)
+
+### Two-phase (oil-water)
+
+![image](https://user-images.githubusercontent.com/51282928/89125770-fb41bc80-d50a-11ea-9941-58ca91e0c478.png)
+
+![image](https://user-images.githubusercontent.com/51282928/89125782-13194080-d50b-11ea-91f9-5f9738931e48.png)
