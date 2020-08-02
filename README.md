@@ -39,7 +39,7 @@ For any specific need that is unique to your case, and want to use PyReSim for y
 
 ## Donation
 
-We tirelessly spent days and nights to continuously develop, fine-tune, and improve PyReSim as an open-source Python reservoir simulator program, with the hope that everyone get benefits from. This work is done without direct financial support. If you like this work, we would be very glad if you would consider to give us a little gift. Your donation will allow us to spend even more time improving this simulator.
+We tirelessly spent days and nights to continuously develop, fine-tune, and improve PyReSim as an open-source Python reservoir simulator program, with the hope that everyone get benefits from. This work is done without direct financial support. If you like (and trust) this work, we would be very glad if you would consider to give us a little gift. Your donation will allow us to spend even more time improving this simulator.
 
 ## License
 
