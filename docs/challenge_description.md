@@ -1,4 +1,13 @@
-## General Info
+# Case Description
+
+* General info
+* Single-phase simulation:
+  * Incompressible fluid
+  * Slightly compressible fluid
+  * Compressible fluid
+* Multi-phase simulation
+
+## General info
 
 ![image](https://user-images.githubusercontent.com/51282928/89118863-7b4c3000-d4d3-11ea-918d-8432b110b475.png)
 
