@@ -1,6 +1,9 @@
 # PyReSim (Python Reservoir Simulator)
 
-Reservoir simulator in Python language (simply building it step-by-step from scratch, to advanced)
+<p align="center">
+  <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
+</p>
+
 
 <div>
 <img src="https://user-images.githubusercontent.com/51282928/85827088-bb6f1300-b7af-11ea-9a1f-eed08adddaff.png" width="400"/><img src="https://user-images.githubusercontent.com/51282928/88214648-b5703300-cc84-11ea-820c-baf233353647.png" width="400"/>
