@@ -76,3 +76,20 @@ of 2000 B/D. The reservoir bottom boundary is subject to influx such that the
 boundary is kept at 4000 psia. The reservoir top boundary is sealed to flow.
 Assuming the reservoir can be simulated using 3 equal gridblocks in the vertical
 direction and 4 gridblocks in the radial direction.
+
+## Donation
+
+## Using PyReSim for Academic Use or Industry
+
+For any specific need that is unique to your case, and want to use PyReSim for your specific need, you are encouraged to discuss with me. I could provide a tutorial for your need. Presented here are the simulator codes applied to the cases presented above. I hope PyReSim can help to simulate most of your needs.
+
+Contact<br>
+📧 e-mail: ign.nuwara97@gmail.com
+
+## Contributing to this Work
+
+## License
+
+The author chooses Creative Commons BY-NC-ND 4.0 International to license this work. 
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
