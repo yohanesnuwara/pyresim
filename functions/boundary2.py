@@ -1,3 +1,9 @@
+"""
+Codes for boundary conditions
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def boundary_floweq1d(bound_type, dx, dy, dz, kx, mu, B, p_b=1000, p_grad=0.1, q_b=-200, no_block=1):
     """
     Boundary Conditions for 1D Rectangular Reservoir (floweq simulation)
