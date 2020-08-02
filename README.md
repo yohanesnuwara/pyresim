@@ -19,9 +19,7 @@ This simulator is built based on explanations in *Petroleum Reservoir Simulation
 
 |Case No.|Picture|Description|
 |:--:|:--:|:--:|
-|<div>
-<img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/>
-</div>|||
+|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div>|sss|sss|
 
 ### Case 1. 1D rectangular reservoir, homogeneous, single-phase
 
