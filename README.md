@@ -30,11 +30,13 @@ PyReSim is performed to a more challenging case. This case is obtained from a "C
 
 ## Donation
 
+We tirelessly spent days and nights to continuously develop, fine-tune, and improve PyReSim as an open-source Python reservoir simulator program, with the hope that everyone get benefits from. If you like this work, we would be very glad if you would consider to give us a little gift. 
+
 ## Using PyReSim for Academic or Industry Use
 
-For any specific need that is unique to your case, and want to use PyReSim for your specific need, you are encouraged to discuss with me. I could provide a tutorial for your need. Presented here are the simulator codes applied to the cases presented above. I hope PyReSim can help to simulate most of your needs.
+For any specific need that is unique to your case, and want to use PyReSim for your specific need, you are encouraged to discuss with us. We could provide a tutorial for your need. Presented here are the simulator codes applied to the cases presented above. We hope PyReSim can help to simulate most of your needs.
 
-Contact<br>
+**Contact**<br>
 📧 e-mail: ign.nuwara97@gmail.com
 
 ## Contributing to this Work
