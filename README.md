@@ -17,9 +17,13 @@ This simulator is built based on explanations in *Petroleum Reservoir Simulation
 
 ## Cases
 
-|Case No.|Picture|Description|Simulator used|
+|Case No.|Picture|Description|Simulators used|
 |:--:|:--:|:--:|:--:|
-|[1]()|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div>|1D reservoir, same size grid|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div><br>[Click here for case description]()|1D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
+|2|<div><img src="https://user-images.githubusercontent.com/51282928/88287885-28c58380-cd1d-11ea-915a-80a7bae7df72.png" width="300"/></div>|2D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_2d`]()|
+|3|<div><img src="https://user-images.githubusercontent.com/51282928/88464930-d638c280-cee8-11ea-8014-59c010afd95b.png" width="300"/></div>|3D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_3d`]|
+
+## "Extra Mile" Case
 
 ### Case 1. 1D rectangular reservoir, homogeneous, single-phase
 
