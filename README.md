@@ -17,13 +17,9 @@ This simulator is built based on explanations in *Petroleum Reservoir Simulation
 
 ## Cases
 
-|Case No.|Picture|Description|
-|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div>|A 5000 ft x 1200 ft x 75 ft horizontal reservoir contains oil that flows
-along its length. The reservoir rock porosity and permeability are 0.18 and 15 md,
-respectively. The oil FVF and viscosity are 1 RB/STB and 10 cp, respectively. The
-reservoir has a well located at 3500 ft from the reservoir left boundary and
-produces oil at a rate of 150 STB/D.|
+|Case No.|Picture|Description|Simulator used|
+|:--:|:--:|:--:|:--:|
+|[1]()|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div>|1D reservoir, same size grid|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
 
 ### Case 1. 1D rectangular reservoir, homogeneous, single-phase
 
