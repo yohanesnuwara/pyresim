@@ -28,10 +28,6 @@ PyReSim is performed to a more challenging case. This case is obtained from a "C
 
 <div><img src="https://user-images.githubusercontent.com/51282928/89013581-54a8c080-d33e-11ea-8f96-704e8b263c5c.png" width="300"/>  <img src="https://user-images.githubusercontent.com/51282928/89118272-894b8200-d4ce-11ea-9e02-6d18d3e48583.png" width="650"/></div>
 
-## Donation
-
-We tirelessly spent days and nights to continuously develop, fine-tune, and improve PyReSim as an open-source Python reservoir simulator program, with the hope that everyone get benefits from. If you like this work, we would be very glad if you would consider to give us a little gift. 
-
 ## Using PyReSim for Academic or Industry Use
 
 For any specific need that is unique to your case, and want to use PyReSim for your specific need, you are encouraged to discuss with us. We could provide a tutorial for your need. Presented here are the simulator codes applied to the cases presented above. We hope PyReSim can help to simulate most of your needs.
@@ -40,6 +36,10 @@ For any specific need that is unique to your case, and want to use PyReSim for y
 📧 e-mail: ign.nuwara97@gmail.com
 
 ## Contributing to this Work
+
+## Donation
+
+We tirelessly spent days and nights to continuously develop, fine-tune, and improve PyReSim as an open-source Python reservoir simulator program, with the hope that everyone get benefits from. This work is done without direct financial support. If you like this work, we would be very glad if you would consider to give us a little gift. Your donation will allow us to spend even more time improving this simulator.
 
 ## License
 
