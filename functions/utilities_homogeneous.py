@@ -1,3 +1,9 @@
+"""
+Codes for gridding utilities in homogeneous reservoir
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def gridproperty1d(prop, xi):
   """
   Create property grid for 1D rectangular reservoir
