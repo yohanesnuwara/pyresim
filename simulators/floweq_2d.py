@@ -1,5 +1,5 @@
 """
-Simulation in 2D Rectangular Reservoir Grids
+Simulation in 2D Homogeneous Rectangular Reservoir Grids
 
 @author: Yohanes Nuwara
 @email: ign.nuwara97@gmail.com
