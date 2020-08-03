@@ -1,5 +1,5 @@
 """
-Codes for boundary conditions
+Codes for boundary conditions in homogeneous reservoir
 @author: Yohanes Nuwara
 @email: ign.nuwara97@gmail.com
 """
