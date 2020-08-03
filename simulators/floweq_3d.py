@@ -1,28 +1,19 @@
 """
-Simulation in 3D Rectangular Reservoir Grids
+Simulation in 3D Homogeneous Rectangular Reservoir Grids
 
 @author: Yohanes Nuwara
 @email: ign.nuwara97@gmail.com
 """
 
+from boundary_homogeneous import *
+from transmissibility_homogeneous import *
+from utilities_homogeneous import *
+
+"""""""""""
+INPUT
+"""""""""""
+
 xi = 4; yi = 3; zi = 3 # number of blocks in x, y, z
-
-# create block coordinates (Engineering Notation convention in Abou-Kassem)
-x_ = np.arange(1, xi+1)
-y_ = np.arange(1, yi+1)
-z_ = np.arange(1, zi+1)
-
-# meshgrid the block coordinates
-x, y, z = np.meshgrid(x_, y_, z_, indexing='ij')
-
-# print('Block {},{},{}'.format(x[2,1,1], y[2,1,1], z[2,1,1]))
-
-# plot the grid points
-# fig = plt.figure(figsize = (10, 7)) 
-# ax = plt.axes(projection ="3d") 
-# ax.scatter3D(x, y, z)
-# # ax.scatter3D(x[2,1,1], y[2,1,1], z[2,1,1], s=50, color='red')
-# plt.show()
 
 # define parameters, in this case blocks are homogeneous and same in size
 dx = 250 # ft
@@ -35,50 +26,30 @@ B = 1 # RB/STB
 mu = 2 # cp
 rho = 55 # fluid density, lbm/ft3
 
-# boundary conditions
-pg_bB = -0.5 # bottom, cons press grad psi/ft
-p_bU = 3000 # upper, cons press psi
-q_bW = 0 # west, no flow
-q_bE = -200 # east, cons flow rate STB/D
-q_bS = 100 # south, cons flow rate STB/D
-p_bN = 1500 # north, cons press psi 
-
-# assign all params to all blocks
-# why yi*xi? Python describes a 3D array as (z, rows, columns), OR (z,y,x)
-dx = np.array([[[dx]*zi]*yi]*xi)
-dy = np.array([[[dy]*zi]*yi]*xi)
-dz = np.array([[[dz]*zi]*yi]*xi)
-kx = np.array([[[kx]*zi]*yi]*xi)
-ky = np.array([[[ky]*zi]*yi]*xi)
-kz = np.array([[[kz]*zi]*yi]*xi)
-B = np.array([[[B]*zi]*yi]*xi)
-mu = np.array([[[mu]*zi]*yi]*xi)
-rho = np.array([[[rho]*zi]*yi]*xi)
-
 # source term
-
-# define the x and y reservoir coordinates 
-xsc = np.array([3, 2, 4, 2])
-ysc = np.array([2, 1, 1, 1])
-zsc = np.array([2, 3, 1, 1])
-
-# Python starts indexing from 0. So, block 1,1 refers to [0,0], block 2,1
-# refers to [1,0] and so on. In other words, block i,j refers to [i-1,j-1]
-xsc = xsc - 1; ysc = ysc - 1; zsc = zsc - 1
+# define the coordinates 
+xyzsc = np.array([(3,2,2), (2,1,3), (4,1,1), (2,1,1)])
 
 # define rate of each source term 
 q = np.array([-133.3, 100, -25, 50]) 
 
-# initiate with zeros. same method with above dx, dy, kx, ky, etc.
-qsc = np.array([[[0]*zi]*yi]*xi)
+# boundary conditions
 
-# replace the zeros at coordinate of source term, with the rate of source term
-for i, j, k, l in zip(xsc, ysc, zsc, range(len(q))):
-  qsc[i][j][k] = q[l]
+bottom = {"type": "constant_pressuregrad", "value": -0.5}
+upper = {"type": "constant_pressure", "value": 3000}
+east = {"type": "constant_rate", "value": -200}
+west = {"type": "no_flow", "value": 0}
+north = {"type": "constant_pressure", "value": 1500}
+south = {"type": "constant_rate", "value": 100}
 
-# # plot the injected grid point
-# for i, j, k in zip(xsc, ysc, zsc):
-#   ax.scatter3D(x[i,j,k], y[i,j,k], z[i,j,k], s=50, color='red')
+"""""""""""
+MAIN CODE
+"""""""""""
+
+# source term
+qsc = source3d(q, xyzsc, xi, yi, zi)
+
+# " Produce flow equations "
 
 print('Right-Hand Side (RHS) of Flow equation in each block')
 print('1st term: Flow in X-direction from next block')
@@ -93,61 +64,30 @@ for i in range(xi):
   for j in range(yi):
     for k in range(zi):
 
-      Ax = dy[i,j,k] * dz[i,j,k]
-      Ay = dx[i,j,k] * dz[i,j,k]
-      Az = dx[i,j,k] * dy[i,j,k]
+      # calculate transmissibility
+      Tx_min, Tx_plus, Ty_min, Ty_plus, Tz_min, Tz_plus = transmissibility3d(dx, dy, dz, kx, ky, kz, mu, B)
 
-      # flow to x direction
-      Tx_min = .001127 * (kx[i,j,k] * Ax) / (mu[i,j,k] * B[i,j,k] * dx[i,j,k])
-      Tx_plus = Tx_min
-
-      # flow to y direction
-      Ty_min = .001127 * (ky[i,j,k] * Ay) / (mu[i,j,k] * B[i,j,k] * dy[i,j,k])
-      Ty_plus = Ty_min 
-
-      # flow to y direction
-      Tz_min = .001127 * (kz[i,j,k] * Az) / (mu[i,j,k] * B[i,j,k] * dz[i,j,k])
-      Tz_plus = Tz_min
-
-      # in 3D case (unlike 1D, 2D), the term γ is not neglected, because there is Z
-      # for example: block (3,2,1) and block (3,2,2) has Z = -33.33 ft
-      # block (3,2,3) and block (3,2,2) has Z = 33.33 ft
-      # then, γ is multiplied by Z
-
-      # Z for flow from below (positive sign, vector)
-      Z_min = dz[i,j,k]
-
-      # Z for flow from above (negative sign, vector)
-      Z_plus = - dz[i,j,k]
-
-      # gamma
-      gamma_min = .21584E-3 * rho[i,j,k] * 32.174
-      gamma_plus = gamma_min
-
-      Z_gamma_min = Z_min * gamma_min
-      Z_gamma_plus = Z_plus * gamma_plus
-
-      # boundary flows
-      qsc_bB = constant_pressuregrad_bc3d('bottom', pg_bB, dx[i,j,k], dy[i,j,k], kz[i,j,k], mu[i,j,k], B[i,j,k], rho[i,j,k]) # bottom
-      qsc_bU = constant_pressure_bc3d('upper', (i+1,j+1,k+1), p_bU, dx[i,j,k], dy[i,j,k], kz[i,j,k], dz[i,j,k], mu[i,j,k], B[i,j,k], rho[i,j,k]) # upper
-      qsc_bS = constant_rate_bc2d(Ty_min, q_bS, (xi*yi)) # south
-      qsc_bN = constant_pressure_bc3d('north', (i+1,j+1,k+1), p_bN, dx[i,j,k], dz[i,j,k], ky[i,j,k], dy[i,j,k], mu[i,j,k], B[i,j,k], rho[i,j,k]) # north
-      qsc_bW = constant_rate_bc2d(Tx_min, q_bW, (yi*zi)) # west
-      qsc_bE = constant_rate_bc2d(Tx_plus, q_bE, (yi*zi)) # east
+      # calculate potential term for z-direction flow
+      Z_gamma_min, Z_gamma_plus = potential3d(dz, rho)   
 
       ## West Boundaries
       if i==0:
+        qsc_bW = boundary_floweq3d(west['type'], 'west', dx, dy, dz, kx, ky, kz, mu, B, rho, west['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=yi*zi)
+
         if j==0:
+          qsc_bS = boundary_floweq3d(south['type'], 'south', dx, dy, dz, kx, ky, kz, mu, B, rho, south['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
+
           if k==0:
             # bottom southwest corner boundary
             # 3 faces. Tx-, Ty-, Tz-
-
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)            
             print('Bottom southwest corner boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
           
           if k==zi-1:
             # upper southwest corner boundary
             # 3 faces. Tx-, Ty-, Tz+
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper southwest corner boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{}] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
           
@@ -158,15 +98,18 @@ for i in range(xi):
             print('Block {}: [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
         if j==yi-1:
+          qsc_bN = boundary_floweq3d(north['type'], 'north', dx, dy, dz, kx, ky, kz, mu, B, rho, north['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
           if k==0:
             # bottom northwest corner boundary
-            # 3 faces. Tx-, Ty+, Tz-
+            # 3 faces. Tx-, Ty+, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom northwest corner boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{}] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper northwest corner boundary
-            # 3 faces. Tx-, Ty+, Tz+
+            # 3 faces. Tx-, Ty+, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper northwest corner boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
           
@@ -180,12 +123,14 @@ for i in range(xi):
           if k==0:
             # bottom west boundary
             # 2 faces. Tx-, Tz-
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom west boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper west boundary
-            # 2 faces. Tx-, Tz+
+            # 2 faces. Tx-, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper west boundary block')
             print('Block {}: [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), qsc_bW, Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -198,15 +143,18 @@ for i in range(xi):
       ## East Boundaries
       if i==xi-1:
         if j==0:
+          qsc_bS = boundary_floweq3d(south['type'], 'south', dx, dy, dz, kx, ky, kz, mu, B, rho, south['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
           if k==0:
             # bottom southeast corner boundary
-            # 3 faces. Tx+, Ty-, Tz-
+            # 3 faces. Tx+, Ty-, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom southeast corner boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper southeast corner boundary
-            # 3 faces. Tx+, Ty-, Tz+
+            # 3 faces. Tx+, Ty-, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper southeast corner boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -217,15 +165,18 @@ for i in range(xi):
             print('Block {}: [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
         if j==yi-1:
+          qsc_bN = boundary_floweq3d(north['type'], 'north', dx, dy, dz, kx, ky, kz, mu, B, rho, north['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
           if k==0:
             # bottom northeast corner boundary
-            # 3 faces. Tx+, Ty+, Tz-
+            # 3 faces. Tx+, Ty+, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom northeast corner boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, 5, qsc[i,j,k]))
 
           if k==zi-1:
             # upper northeast corner boundary
-            # 3 faces. Tx+, Ty+, Tz+
+            # 3 faces. Tx+, Ty+, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper northeast corner boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -238,13 +189,15 @@ for i in range(xi):
         if j!=0 and j!=yi-1:
           if k==0:
             # bottom east boundary
-            # 2 faces. Tx+, Tz-
+            # 2 faces. Tx+, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom east boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper east boundary
-            # 2 faces. Tx+, Tz+
+            # 2 faces. Tx+, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper east boundary block')
             print('Block {}: [{}] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), qsc_bE, Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -257,15 +210,18 @@ for i in range(xi):
       ## North, South, Bottom, Upper Boundaries and Interior Blocks
       if i!=0 and i!=xi-1:
         if j==0:
+          qsc_bS = boundary_floweq3d(south['type'], 'south', dx, dy, dz, kx, ky, kz, mu, B, rho, south['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
           if k==0:
             # bottom south boundary
-            # 2 faces. Ty-, Tz-
+            # 2 faces. Ty-, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom south boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper south boundary
-            # 2 faces. Ty-, Tz+
+            # 2 faces. Ty-, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper south boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -276,15 +232,18 @@ for i in range(xi):
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), qsc_bS, Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
         if j==yi-1:
+          qsc_bN = boundary_floweq3d(north['type'], 'north', dx, dy, dz, kx, ky, kz, mu, B, rho, north['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*zi)
           if k==0:
             # bottom north boundary
-            # 2 faces. Ty+, Tz-
+            # 2 faces. Ty+, Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom north boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper north boundary
-            # 2 faces. Ty+, Tz+
+            # 2 faces. Ty+, Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper north boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), qsc_bN, Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
@@ -297,13 +256,15 @@ for i in range(xi):
         if j!=0 and j!=yi-1:
           if k==0:
             # bottom boundary
-            # 1 face. Tz-
+            # 1 face. Tz-            
+            qsc_bB = boundary_floweq3d(bottom['type'], 'bottom', dx, dy, dz, kx, ky, kz, mu, B, rho, bottom['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Bottom boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{}) - ({})] + [{}] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), Tz_plus, (i+1,j+1,k+2), (i+1,j+1,k+1), Z_gamma_plus, qsc_bB, qsc[i,j,k]))
 
           if k==zi-1:
             # upper boundary
-            # 1 face. Tz+
+            # 1 face. Tz+            
+            qsc_bU = boundary_floweq3d(upper['type'], 'upper', dx, dy, dz, kx, ky, kz, mu, B, rho, upper['value'], no_block=(i+1,j+1,k+1), no_blocks_shared=xi*yi)
             print('Upper boundary block')
             print('Block {}: [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{} (p{} - p{})] + [{}] + [{} (p{} - p{}) - ({})] + [{}] \n'.format((i+1,j+1,k+1), Tx_plus, (i+2,j+1,k+1), (i+1,j+1,k+1), Tx_min, (i,j+1,k+1), (i+1,j+1,k+1), Ty_plus, (i+1,j+2,k+1), (i+1,j+1,k+1), Ty_min, (i+1,j,k+1), (i+1,j+1,k+1), qsc_bU, Tz_min, (i+1,j+1,k), (i+1,j+1,k+1), Z_gamma_min, qsc[i,j,k]))
 
