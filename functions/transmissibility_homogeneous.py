@@ -1,3 +1,9 @@
+"""
+Codes for transmissibility and potential calculation in homogeneous reservoir
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def transmissibility1d(dx, dy, dz, kx, mu, B):
   A = dy * dz
   T_min = .001127 * (kx * A) / (mu * B * dx)
