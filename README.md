@@ -11,12 +11,6 @@
 |[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py),<br>[`floweq_2d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_2d.py)<br>[`floweq_3d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_3d.py)|Multidimensional, homogeneous,<br> single-phase, rectangular grid,<br> same size grids|Produces flow equations for each grid block|
 |[`floweq_well`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_well.py)|2D, homogeneous, single-phase,<br> cylindrical grid, varying size grid<br> in `r` direction|Produces flow equations for each grid block<br> (well simulation)|
 
-## Type of reservoirs in this simulator
-
-|`simple` reservoir|`real` reservoir|
-|:--:|:--:|
-|same size grid,<br> regular boundary,<br> homogeneous property|different (+same) size grid,<br> irregular (+regular)  boundary,<br> heterogeneous (+homogeneous) property|
-
 ## Cases
 
 |Case No.|Picture|Description|Simulators used|
