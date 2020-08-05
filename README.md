@@ -30,6 +30,12 @@ PyReSim is performed to a more challenging case. This case is obtained from a "C
 
 <div><img src="https://user-images.githubusercontent.com/51282928/89013581-54a8c080-d33e-11ea-8f96-704e8b263c5c.png" width="300"/>  <img src="https://user-images.githubusercontent.com/51282928/89118272-894b8200-d4ce-11ea-9e02-6d18d3e48583.png" width="650"/></div>
 
+## License
+
+The author chooses Creative Commons BY-NC-ND 4.0 International to license this work. 
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+
 <!--
 **yohanesnuwara/yohanesnuwara** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
