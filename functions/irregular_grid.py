@@ -23,7 +23,7 @@ def create_irregular_grid(x, y, xy_inactive):
   for i, j in zip(x_inactive, y_inactive):
     x[i,j], y[i,j] = np.nan, np.nan  
   
-  return x,y
+  return x, y, x_inactive, y_inactive
   
 def maskout_inactive_blocks(prop_in, x_inactive, y_inactive, xi):
   import numpy as np
