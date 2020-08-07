@@ -8,6 +8,8 @@ def wellblock_geometric_factor_1dlinear(dx, dy, kx, ky, s, rw, h):
   """
   Calculate the "theoretical" geometric factor
   """
+  import numpy as np
+  
   if kx != ky:
     # anisotropic wellblock
     r_eq = 0.28 * (((ky / kx)**0.5 * dx**2) + ((kx / ky)**0.5 * dy**2))**0.5 / ((ky / kx)**0.25 + (kx / ky)**0.25)
