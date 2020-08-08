@@ -30,6 +30,7 @@ def fraction_wellblock_geometric_factor(dx, dy, kx, ky, s, rw, h, well_config):
   """
   Calculate the geometric factor as the FRACTION of the "theoretical" geom. factor
   """
+  import numpy as np
   # modify the Δx and Δy for the boundary (well configurations)
   if well_config==0:
     dx, dy = dx, dy
