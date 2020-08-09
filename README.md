@@ -8,16 +8,15 @@
 
 > This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete. See my progress bar to keep updated, stay tuned!
 
-## Simulators available
+**Various reservoir geometry and properties.** Regular 1D, 2D, and 3D rectangular reservoir grids; 
 
-|Simulator name|Assumptions|Description|
-|:--:|:--:|:--:|
-|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py),<br>[`floweq_2d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_2d.py)<br>[`floweq_3d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_3d.py)|Multidimensional, homogeneous,<br> single-phase, rectangular grid,<br> same size grids|Produces flow equations for each grid block|
-|[`floweq_well`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_well.py)|2D, homogeneous, single-phase,<br> cylindrical grid, varying size grid<br> in `r` direction|Produces flow equations for each grid block<br> (well simulation)|
+**Various boundary conditions treated.** Specified flow rate or no flow condition, Specified pressure condition, Specified pressure gradient condition
 
-**Various boundary conditions treated:** Specified flow rate or no flow condition, Specified pressure condition, Specified pressure gradient condition
+**Various operating-well conditions treated.** Specified flow rate or no flow condition, Specified flowing borehole pressure (FBHP) condition, Specified pressure gradient condition
 
-**Various operating-well conditions treated:** Specified flow rate or no flow condition, Specified flowing borehole pressure (FBHP) condition, Specified pressure gradient condition
+**Various reservoir types simulated.** Single-phase incompressible-fluid reservoir (brine), slightly-compressible-fluid reservoir (undersaturated oil), to compressible-fluid reservoir (gas), and multi-phase reservoir (brine-oil-water)
+
+**Various solver methods to solve and compare.** Matrix inversion (very 3x basic method), explicit, implicit, Crank-Nicholson, and many more. 
 
 ## Cases
 
