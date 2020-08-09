@@ -1,8 +1,12 @@
-# PyReSim (still on work)
+# PyReSim*
+
+*) still on work
 
 <p align="center">
   <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
 </p>
+
+> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete. See my progress bar to keep updated, stay tuned!
 
 ## Simulators Available
 
