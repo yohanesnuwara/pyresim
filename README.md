@@ -8,7 +8,6 @@
 
 > This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete. See my progress bar to keep updated, stay tuned!
 
-## Simulators Available
 
 |Simulator name|Assumptions|Description|
 |:--:|:--:|:--:|
