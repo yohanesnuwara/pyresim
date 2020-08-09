@@ -16,7 +16,7 @@
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
 |Well details|Diameter; skin factor|
 |Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
-|Reservoir fluid types|Single-phase incompressible-fluid reservoir (brine); slightly-compressible-fluid reservoir (undersaturated oil); compressible-fluid reservoir (gas); multi-phase reservoir (brine-oil-water)|
+|Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
 ## Teasers
