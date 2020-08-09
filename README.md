@@ -14,7 +14,7 @@
 |:--:|:--|
 |Reservoir geometry|Regular 1D, 2D, 3D rectangular grids; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries|
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
-|Well details|Diameter; skin factor|
+|Well details|Diameter; skin factor; location at the grid block (center, edge, or corner)|
 |Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
 |Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
