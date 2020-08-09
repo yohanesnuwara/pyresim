@@ -8,18 +8,18 @@
 
 > This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete. See my progress bar to keep updated, stay tuned!
 
-|:--:|:--:|
-|yete|udyd|
+## Aspects simulated in *PyReSim*
 
-**Various reservoir geometry and properties.** Regular 1D, 2D, and 3D rectangular reservoir grids; 
+|Aspects|Availability|
+|:--:|:--|
+|Reservoir geometry|Regular 1D, 2D, 3D rectangular grids; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries|
+|Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
+|Well details|Diameter; skin factor|
+|Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
+|Reservoir fluid types|Single-phase incompressible-fluid reservoir (brine); slightly-compressible-fluid reservoir (undersaturated oil); compressible-fluid reservoir (gas); multi-phase reservoir (brine-oil-water)|
+|Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
-**Various boundary conditions treated.** Specified flow rate or no flow condition, Specified pressure condition, Specified pressure gradient condition
-
-**Various operating-well conditions treated.** Specified flow rate or no flow condition, Specified flowing borehole pressure (FBHP) condition, Specified pressure gradient condition
-
-**Various reservoir types simulated.** Single-phase incompressible-fluid reservoir (brine), slightly-compressible-fluid reservoir (undersaturated oil), to compressible-fluid reservoir (gas), and multi-phase reservoir (brine-oil-water)
-
-**Various solver methods to solve and compare.** Matrix inversion (very 3x basic method), explicit, implicit, Crank-Nicholson, and many more. 
+## Teasers
 
 ## Cases
 
