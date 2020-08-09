@@ -1,6 +1,6 @@
 # PyReSim*
 
-*) still on work. Progress bar ![50%](https://progress-bar.dev/50)
+*) still on work. Progress bar ![30%](https://progress-bar.dev/30)
 
 <p align="center">
   <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
