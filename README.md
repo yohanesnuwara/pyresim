@@ -12,7 +12,7 @@
 
 |Aspects|Availability|
 |:--:|:--|
-|Reservoir geometry|Regular 1D, 2D, 3D rectangular grids; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries|
+|Reservoir geometry|Regular 1D and 2D; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries; 3D reservoir (**)|
 |Reservoir property|Homogeneous (both isotropic & anisotropic permeability) (*); heterogeneous (**)|
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
 |Well details|Diameter; skin factor; location at the grid block (center, edge, or corner)|
