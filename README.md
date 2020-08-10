@@ -12,16 +12,15 @@
 
 |Aspects|Availability|
 |:--:|:--|
-|Reservoir geometry|Regular 1D and 2D; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries; 3D reservoir (**)|
-|Reservoir property|Homogeneous (both isotropic & anisotropic permeability) (*); heterogeneous (**)|
+|Reservoir geometry|Regular 1D and 2D; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries; 3D reservoir (*)|
+|Reservoir property|Homogeneous (both isotropic & anisotropic permeability); heterogeneous (*)|
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
 |Well details|Diameter; skin factor; location at the grid block (center, edge, or corner)|
 |Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
 |Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
-(*) First launch of PyReSim (Scheduled in October 2020)<br>
-(**) Second launch of PyReSim
+> (*) These aspects are still not available on the first launch (in October 2020). It will be available on the second launch (afterwards). 
 
 ## Teasers
 
