@@ -6,18 +6,22 @@
   <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
 </p>
 
-> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete. See my progress bar to keep updated, stay tuned!
+> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in October 2020). See my progress bar to keep updated, stay tuned!
 
 ## Aspects simulated in *PyReSim*
 
 |Aspects|Availability|
 |:--:|:--|
 |Reservoir geometry|Regular 1D, 2D, 3D rectangular grids; 2D cylindrical well simulation; 2D reservoir with different elevations; 2D reservoir with irregular boundaries|
+|Reservoir property|Homogeneous (both isotropic & anisotropic permeability) (*); heterogeneous (**)|
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
 |Well details|Diameter; skin factor; location at the grid block (center, edge, or corner)|
 |Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
 |Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
+
+(*) First launch of PyReSim (Scheduled in October 2020)<br>
+(**) Second launch of PyReSim
 
 ## Teasers
 
