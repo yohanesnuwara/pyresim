@@ -79,7 +79,8 @@ def rhs_constant2d_welltype(solver, boundary_dict, well_dict, potential_term,
   """ 
   
   import numpy as np
-  
+  from boundary import boundary_flow2d_constant_pressuregrad  
+   
   well_condition = well_dict['condition']
   well_value = well_dict['value']
   well_rw = well_dict['rw']
