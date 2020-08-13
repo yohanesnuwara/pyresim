@@ -4,27 +4,6 @@ Codes to calculate wellblock geometric factor, prorate (production rate), and es
 @author: Yohanes Nuwara
 @email: ign.nuwara97@gmail.com
 """
-def wellblock_geometric_factor_1dlinear(dx, dy, kx, ky, s, rw, h):
-  """
-  Calculate the "theoretical" geometric factor
-  """
-  import numpy as np
-  
-  if kx != ky:
-    # anisotropic wellblock
-    r_eq = 0.28 * (((ky / kx)**0.5 * dx**2) + ((kx / ky)**0.5 * dy**2))**0.5 / ((ky / kx)**0.25 + (kx / ky)**0.25)
-    kh = (kx * ky)**0.5
-
-  if kx == ky:
-    # isotropic wellblock
-    kh = kx
-    if dx == dy:
-      r_eq = 0.198 * dx
-    if dx != dy:
-      r_eq = 0.14 * (dx**2 + dy**2)**0.5
-
-  Gw = (2 * np.pi * .001127 * kh * h) / (np.log(r_eq / rw) + s)
-  return kh, r_eq, Gw
 
 def fraction_wellblock_geometric_factor(dx, dy, kx, ky, s, rw, h, well_config):
   """
@@ -61,10 +40,3 @@ def fraction_wellblock_geometric_factor(dx, dy, kx, ky, s, rw, h, well_config):
 
   Gw = fr * (2 * np.pi * .001127 * kh * h) / (np.log(r_eq / rw) + s)  
   return kh, r_eq, Gw
-
-def wellblock_geometric_factor_1dradial(kh, Z, r1, rw, s):
-  """
-  Z = elevation 
-  """
-  Gw = (2 * np.pi * .001127 * kh * Z) / (np.log(r1 / rw) + s)
-  return Gw
