@@ -26,7 +26,7 @@
 
 |Teaser No.|Picture|Description|Input data|Simulators used|
 |:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90149011-31eec100-ddae-11ea-889c-4dfd2a4a6dfa.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|A gas-free oil in a 2D reservoir<br> with uniform grid dimension. Reservoir boundary<br> in the west has constant pressure,<br> in the east has no flow, in the south<br> is sealed (no flow),<br> and in the north has constant rate. Five wells penetrates the reservoir<br>, with various wellbore radius, skin, and operating conditions.|[`incompressible1`]|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90149011-31eec100-ddae-11ea-889c-4dfd2a4a6dfa.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|A gas-free oil in a 2D reservoir with uniform<br> grid dimension. Reservoir boundary in the west<br> has constant pressure, in the east has no flow,<br> in the south is sealed (no flow), and in the<br> north has constant rate. Five wells penetrates<br> the reservoir, with various wellbore radius,<br> skin, and operating conditions.||[`incompressible1`]|
 
 ## Cases
 
