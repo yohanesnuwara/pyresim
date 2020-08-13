@@ -38,10 +38,10 @@ def read_input(filepath):
 
   """
   import numpy as np
-  
+
   # reservoir input
   prop = np.loadtxt(filepath, max_rows=1, skiprows=12)
-  xi, yi, dx, dy, dz = prop[0], prop[1], prop[2], prop[3], prop[4]
+  xi, yi, dx, dy, dz = (prop[0]).astype(int), (prop[1]).astype(int), prop[2], prop[3], prop[4]
   kx, ky, kz, poro, rho = prop[5], prop[6], prop[7], prop[8], prop[9]
   cpore, mu, B = prop[10], prop[11], prop[12]
 
@@ -66,6 +66,7 @@ def read_input(filepath):
   for i in range(len(well_xsc)):
     well_loc[i] = [well_xsc[i], well_ysc[i]]
 
+  well_loc = well_loc.astype(int)
   well_loc = well_loc.tolist()
 
   ## create well information dictionary
