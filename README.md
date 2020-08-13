@@ -24,9 +24,9 @@
 
 ## Teasers
 
-|Teaser No.|Picture|Description|Simulators used|
-|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90149011-31eec100-ddae-11ea-889c-4dfd2a4a6dfa.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|1D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
+|Teaser No.|Picture|Description|Input data|Simulators used|
+|:--:|:--:|:--:|:--:|:--:|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90149011-31eec100-ddae-11ea-889c-4dfd2a4a6dfa.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|A gas-free oil in a 2D reservoir with uniform grid dimension. Reservoir boundary in the west has constant pressure, in the east has no flow, in the south is sealed (no flow), and in the north has constant rate.|[`incompressible1`]|
 
 ## Cases
 
