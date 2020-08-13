@@ -1,3 +1,8 @@
+"""
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B):
   """
   Calculate the Left-hand side (LHS) coefficients of p+, p-, and p
