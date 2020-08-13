@@ -6,7 +6,7 @@
   <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
 </p>
 
-> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in October 2020). See my progress bar to keep updated, stay tuned!
+> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in November 2020). See my progress bar to keep updated, stay tuned!
 
 ## Aspects simulated in *PyReSim*
 
@@ -20,9 +20,13 @@
 |Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
-> (*) These aspects are still not available on the first launch (in October 2020). It will be available on the second launch (afterwards). 
+> (*) These aspects are still not available on the first launch (in November 2020). It will be available on the second launch (afterwards). 
 
 ## Teasers
+
+|Teaser No.|Picture|Description|Simulators used|
+|:--:|:--:|:--:|:--:|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90144800-775cbf80-dda9-11ea-9902-12cdda9cb953.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|1D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
 
 ## Cases
 
