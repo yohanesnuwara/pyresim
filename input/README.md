@@ -5,7 +5,7 @@ Input data in TXT file is used as is. Do not modify the lines, and just input th
 from input_output import read_data
 
 filepath = '/.../template.txt'
-xi, yi, dx, dy, dz, kx, ky, kz, poro, rho, cpore, mu, B, well, boundary = read_input(filepath)
+reservoir_input, well, west_boundary, east_boundary, south_boundary, north_boundary = read_input(filepath)
 ```
 
 ### Important Notes:
