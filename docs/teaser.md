@@ -18,6 +18,25 @@ An incompressible gas-free oil in an incompressible 2D reservoir with uniform gr
 |Oil viscosity|3.5 cp|
 |Oil FVF|1|
 
+**Reservoir boundary data**
+
+|Boundary|Condition|Value|
+|:--:|:--:|:--:|
+|West|Constant pressure|3,000 psi|
+|East|No flow|0 STB/D|
+|South|Constant pressure gradient|-0.2 psi/ft|
+|North|Constant rate|-100 STB/D|
+
+**Well input data**
+
+|Name|Radius|Skin|Condition|Value|
+|:--:|:--:|:--:|:--:|:--:|
+|A|3.5|1.5|Constant FBHP|2,000 psi|
+|B|4|0.1|Constant rate|-600 STB/D|
+|C|4.5|0|Constant rate|350 STB/D|
+|D|3.5|0.1|Constant FBHP|3,000 psi|
+|E|3.2|0|Constant rate|-150 STB/D|
+
 > An incompressible gas-free oil means it has `B` or FVF equals 1. An incompressible reservoir means it has pore compressibility `CPORE` equals 0. Check out the [input file](https://github.com/yohanesnuwara/pyresim/blob/master/input/teaser1.txt)
 
 Under this condition, pressure distribution in the reservoir behaves like **steady-state** (no change with time), hence, `incompressible` solver is used. 
