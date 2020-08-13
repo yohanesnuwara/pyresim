@@ -1,4 +1,4 @@
-def boundary2d_location(x, y):
+def boundary2d_location(x, y, xi, yi):
   " Classify boundary for transmissibility"
   
   import numpy as np
