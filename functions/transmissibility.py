@@ -1,3 +1,8 @@
+"""
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def transmissibility2d_boundary(bound_loc, bound_type, dx, dy, dz, kx, mu, B):
   """
   Calculate the transmissibility at boundary (specifically for constant pressure B.C.)
