@@ -136,3 +136,101 @@ def rhs_constant2d_welltype(solver, boundary_dict, well_dict, potential_term,
   rhs = -(rhs1 + A + potential_term)
   
   return rhs 
+
+def fill2d_lhs_mat(bound_loc, block_index, xi, lhs_mat, px_min, px_plus, py_min, py_plus, p):
+  """
+  Fill the LHS coefficients into 2D matrix 
+  For 2D reservoir
+
+  Input:
+
+  bound_loc = location of block coded (13, 14, 23, 24, etc.)
+  block_index = block index matrix (created before simulation)
+  xi = number of grid blocks in x-direction  
+  lhs_mat = empty LHS matrix (created before simulation)
+  px_min, px_plus, py_min, py_plus, p = coefficients of LHS
+
+  Output:
+
+  lhs_mat = LHS matrix has been filled with the LHS coefficients
+  """
+  
+  import numpy as np
+  
+  i = block_index - 1
+
+  # Boundary blocks
+  if bound_loc==13:
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  if bound_loc==23:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  if bound_loc==14:
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i] = p
+
+  if bound_loc==24:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i] = p
+
+  if bound_loc==1:
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  if bound_loc==2:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  if bound_loc==3:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  if bound_loc==4:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i] = p   
+
+  # Interior blocks
+  if bound_loc==0:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i+1] = px_plus
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p
+
+  return lhs_mat
+
+def fill2d_rhs_mat(block_index, rhs_mat, rhs):
+  """
+  Fill the RHS constants into 2D matrix 
+  For 2D reservoir
+
+  Input:
+
+  block_index = block index matrix (created before simulation)
+  rhs_mat = empty RHS matrix (created before simulation)
+  rhs = the RHS constant
+
+  Output:
+
+  rhs_mat = RHS matrix has been filled with the RHS coefficients
+  """  
+  import numpy as np
+  
+  i = block_index - 1
+  rhs_mat[i,0] = rhs
+  return rhs_mat
