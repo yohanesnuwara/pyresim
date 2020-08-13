@@ -1,3 +1,8 @@
+"""
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def fill_active_blocks(prop_in, x):
   import numpy as np
   import copy
