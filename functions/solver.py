@@ -2,8 +2,10 @@ def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B):
   """
   Calculate the Left-hand side (LHS) coefficients of p+, p-, and p
   2D reservoir
-
   """
+  
+  import numpy as np
+  
   Tx_min, Tx_plus, Ty_min, Ty_plus = T[0], T[1], T[2], T[3]
   well_condition = well_dict['condition']
   Gw = well_dict['Gw']
@@ -74,8 +76,10 @@ def rhs_constant2d_welltype(solver, boundary_dict, well_dict, potential_term,
 
   potential_term = potential calculated using 'potential1d', 'potential2d', and 'potential3d'
   (for grid with ELEVATION only. If there's no ELEVATION, potential_term = 0)
-
   """ 
+  
+  import numpy as np
+  
   well_condition = well_dict['condition']
   well_value = well_dict['value']
   well_rw = well_dict['rw']
