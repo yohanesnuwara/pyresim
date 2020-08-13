@@ -5,6 +5,17 @@ Codes to calculate wellblock geometric factor, prorate (production rate), and es
 @email: ign.nuwara97@gmail.com
 """
 
+def prodrate1d(well_condition, well_value, Gw=10, mu=1, B=1, rw=2, kh=10, h=10):
+  if well_condition == 'shutin':
+    qsc = 0
+  if well_condition == 'constant_pressuregrad':
+    qsc = (- (2 * np.pi * .001127 * kh * rw * h) / (B * mu)) * well_value
+  if well_condition == 'constant_fbhp':
+    qsc = '{} (p - {})'.format((-Gw / (mu * B)), pwf)
+  if well_condition == 'constant_rate':
+    qsc = q
+  return qsc
+
 def fraction_wellblock_geometric_factor(dx, dy, kx, ky, s, rw, h, well_config):
   """
   Calculate the geometric factor as the FRACTION of the "theoretical" geom. factor
