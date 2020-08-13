@@ -24,13 +24,13 @@
 
 ## Teasers
 
-|Teaser No.|Picture|Description|Input data|Simulators used|
+|Teaser No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
 |1|<div><img src="https://user-images.githubusercontent.com/51282928/90149011-31eec100-ddae-11ea-889c-4dfd2a4a6dfa.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|A gas-free oil in a 2D reservoir with uniform<br> grid dimension. Reservoir boundary in the west<br> has constant pressure, in the east has no flow,<br> in the south is sealed (no flow), and in the<br> north has constant rate. Five wells penetrates<br> the reservoir, with various wellbore radius,<br> skin, and operating conditions.|[`teaser1`](https://github.com/yohanesnuwara/pyresim/blob/master/input/teaser1.txt)|[`incompressible1`]()|
 
 ## Cases
 
-|Case No.|Picture|Description|Simulators used|
+|Case No.|Picture|Description|Simulator|
 |:--:|:--:|:--:|:--:|
 |1|<div><img src="https://user-images.githubusercontent.com/51282928/88264056-526ab480-ccf5-11ea-9cd0-622b6a57af6b.png" width="300"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-1-1d-rectangular-reservoir-homogeneous-single-phase)|1D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_1d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_1d.py)|
 |2|<div><img src="https://user-images.githubusercontent.com/51282928/88287885-28c58380-cd1d-11ea-915a-80a7bae7df72.png" width="250"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/case_descriptions.md#case-2-2d-rectangular-reservoir-homogeneous-single-phase)|2D reservoir, same size rectangular<br> grid, homogeneous, single-phase|[`floweq_2d`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/floweq_2d.py)|
