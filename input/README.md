@@ -7,3 +7,7 @@ from input_output import read_data
 filepath = '/.../template.txt'
 xi, yi, dx, dy, dz, kx, ky, kz, poro, rho, cpore, mu, B, well, boundary = read_input(filepath)
 ```
+
+### Important Notes:
+
+* well should be inputed in order based on their block coordinates
