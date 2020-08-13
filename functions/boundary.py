@@ -1,3 +1,8 @@
+"""
+@author: Yohanes Nuwara
+@email: ign.nuwara97@gmail.com
+"""
+
 def boundary2d_location(x, y, xi, yi):
   " Classify boundary for transmissibility"
   
