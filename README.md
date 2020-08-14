@@ -30,6 +30,27 @@
 |:--:|:--:|:--:|:--:|:--:|
 |1|<div><img src="https://user-images.githubusercontent.com/51282928/90217017-50929d80-de2a-11ea-8bb1-560b2ff2365c.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-1)|A gas-free oil in a 2D reservoir with uniform<br> grid dimension. Reservoir boundary in the west<br> has constant pressure, in the east is sealed (no flow),<br> in the south has pressure gradient, and in the<br> north has constant rate. Five wells penetrates<br> the reservoir, with various wellbore radius,<br> skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/blob/master/input/teaser1.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/PyReSim_teaser1.ipynb)|
 
+## Simulation Cases
+
+### Basic
+
+|Case No.|Picture|Description|Input data|Simulator|
+|:--:|:--:|:--:|:--:|:--:|
+
+### Intermediate 
+
+> Varying boundary conditions in different sides of the reservoir, and varying well operating conditions, wellbore radius, and skin.
+
+|Case No.|Picture|Description|Input data|Simulator|
+|:--:|:--:|:--:|:--:|:--:|
+
+### Advanced 
+
+> Giving uneven distributions of multiple boundary conditions, and giving elevation to the grid blocks. 
+
+|Case No.|Picture|Description|Input data|Simulator|
+|:--:|:--:|:--:|:--:|:--:|
+
 ## Challenging Case
 
 PyReSim will be performed to a more challenging case. This case is obtained from a "Chapter Project" in *Basic Applied Reservoir Simulation* (Ertekin, Abou-Kassem, King; 2001). In this case, the reservoir geometry is complex (irregular boundary, varied grid size) and reservoir property is heterogeneous. [See more details of this case](https://github.com/yohanesnuwara/pyresim/blob/master/docs/challenge_description.md)
