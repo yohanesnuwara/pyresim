@@ -19,6 +19,12 @@ def transmissibility2d_boundary(bound_loc, bound_type, dx, dy, dz, kx, mu, B):
     T = 0    
   return T 
 
+def transmissibility1d(dx, dy, dz, kx, mu, B):
+  A = dy * dz
+  T_min = .001127 * (kx * A) / (mu * B * dx)
+  T_max = T_min
+  return T_min, T_max
+
 def transmissibility2d(dx, dy, dz, kx, ky, mu, B):
   Ax = dy * dz
   Ay = dx * dz
