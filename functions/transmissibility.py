@@ -3,6 +3,18 @@
 @email: ign.nuwara97@gmail.com
 """
 
+def transmissibility1d_boundary(bound_type, dx, dy, dz, kx, mu, B):
+  """
+  Calculate the transmissibility at boundary (specifically for constant pressure B.C.)
+  1D reservoir
+  """
+  if bound_type=='constant_pressure':
+    Ax = dy * dz
+    T = .001127 * (kx * Ax) / (mu * B * 0.5 * dx)
+  else:
+    T = 0    
+  return T
+
 def transmissibility2d_boundary(bound_loc, bound_type, dx, dy, dz, kx, mu, B):
   """
   Calculate the transmissibility at boundary (specifically for constant pressure B.C.)
