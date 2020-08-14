@@ -6,6 +6,63 @@ Producing well report
 @email: ign.nuwara97@gmail.com
 """
 
+def solution_well1d(well_df, p_sol):
+  """
+  Calculate Well FBHP and Rate after pressure has been solved
+
+  If well condition:
+  * 'constant_fbhp': rate estimated from FBHP, FBHP = FBHP
+  * 'constant_rate': rate = rate, FBHP estimated from rate
+  * 'shutin': rate = 0, FBHP equals to the solved grid pressure (= p_sol)
+
+  Input:
+
+  well_df = well dataframe
+  p_sol = pressure solution (array)
+
+  """
+  import numpy as np
+
+  num_of_wells = well_df['well_name'].count()
+
+  rate_sol = []
+  fbhp_sol = []
+
+  for i in range(num_of_wells):
+    if well_df['well_condition'].iloc[i] == 'constant_rate':
+      mu, B, Gw, qsc = well_df['well_mu'].iloc[i], well_df['well_B'].iloc[i], well_df['well_Gw'].iloc[i], well_df['well_value'].iloc[i]
+      loc = well_df['well_loc'].iloc[i]      
+      p_sol_ = p_sol[loc-1] 
+
+      factor = Gw / (mu * B)
+      pwf = (qsc + (factor * p_sol_)) / factor 
+      qsc = qsc
+
+    if well_df['well_condition'].iloc[i] == 'constant_fbhp':
+      mu, B, Gw, pwf = well_df['well_mu'].iloc[i], well_df['well_B'].iloc[i], well_df['well_Gw'].iloc[i], well_df['well_value'].iloc[i]
+      loc = well_df['well_loc'].iloc[i]
+      p_sol_ = p_sol[loc-1]      
+      pwf = pwf
+      qsc = -(Gw / (mu * B)) * (p_sol_ - pwf)  
+
+    if well_df['well_condition'].iloc[i] == 'shutin': 
+      loc = well_df['well_loc'].iloc[i]
+      p_sol_ = p_sol[loc-1]       
+      pwf = p_sol_
+      qsc = 0
+
+    if well_df['well_condition'].iloc[i] == 'constant_pressuregrad':     
+      pwf = np.nan
+      qsc = np.nan
+    
+    fbhp_sol.append(float(pwf))
+    rate_sol.append(float(qsc))
+  
+  well_df['fbhp_sol'] = fbhp_sol
+  well_df['rate_sol'] = rate_sol
+
+  return well_df
+
 def solution_well2d(well_df, p_sol):
   """
   Calculate Well FBHP and Rate after pressure has been solved
