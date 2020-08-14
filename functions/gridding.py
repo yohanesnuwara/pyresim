@@ -23,6 +23,27 @@ def fill_active_blocks(prop_in, x):
   
   return prop_out
 
+def source1d(q, xsc, xi):
+  """
+  Create source grid for 1D rectangular reservoir
+  Input:
+  q = amount of production / injection rate (+ value for injection, - value for
+  production)
+  xsc = location of production / injection well
+  xi = dimension in x-direction
+  Output:
+  qsc = source grid (1D numpy array), informs source value at each grid
+  """
+  import numpy as np
+  xsc = np.array(xsc) - 1
+  block = np.arange(1, xi+1)  
+  qsc = np.zeros(len(block)) # initiate with zeros
+
+  for i, j in zip(xsc, range(len(q))):
+    qsc[i] = q[j]
+
+  return qsc
+
 def source2d(q, xysc, xi, yi):
   """
   Create source grid for 2D rectangular reservoir
