@@ -3,7 +3,7 @@
 ## Teaser 1
 
 <p align="center">
-  <img width="300" height="300" src="https://user-images.githubusercontent.com/51282928/90167115-6fab1400-ddc5-11ea-9960-fd0e98a69b01.png">
+  <img width="300" height="300" src="https://user-images.githubusercontent.com/51282928/90217017-50929d80-de2a-11ea-8bb1-560b2ff2365c.png">
 </p>
 
 An incompressible gas-free oil in an incompressible 2D reservoir with uniform grid dimension. Reservoir boundary in the west has constant pressure, in the east is sealed (no flow), in the south has pressure gradient, and in the north has constant rate. Five wells penetrates the reservoir, with various wellbore radius, skin, and operating conditions.
