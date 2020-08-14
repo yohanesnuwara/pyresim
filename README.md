@@ -5,7 +5,7 @@
 *) still on work. Progress bar ![30%](https://progress-bar.dev/30)
 
 <p align="center">
-  <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/89118699-ebf24d00-d4d1-11ea-92a9-76495358fc6c.png">
+  <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/90232288-a5dca800-de46-11ea-8b11-2d4bdbf3186e.png">
 </p>
 
 > This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in November 2020). See my progress bar to keep updated, stay tuned!
