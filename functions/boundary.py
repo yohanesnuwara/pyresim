@@ -131,6 +131,59 @@ def boundary_flow2d_constant_pressuregrad(bound_loc, value, potential_term, kx, 
     qsc = (.001127 * (ky * Ay) / (mu * B)) * (value - potential_term)  
   return qsc   
 
+def boundary_floweq1d(bound_type, dx, dy, dz, kx, mu, B, value, no_block=1):
+    """
+    Boundary Conditions for 1D Rectangular Reservoir (floweq simulation)
+    Input:
+    bound_type = type of boundary condition at West (bW) and East (bE) boundaries ('constant_pressure',
+    'constant_pressuregrad', 'constant_rate', 'no_flow'
+    dx, dy, dz = size of grid
+    kx = permeability in x-direction
+    mu = fluid viscosity in boundary block
+    B = fluid FVF in boundary block
+    value = specify the boundary value, depends on the boundary conditions
+    * if B.C. is 'constant_pressure', specify the pressure gradient: p_b
+    * if B.C. is 'constant_pressuregrad', specify the pressure gradient: p_grad
+    * if B.C. is 'constant_rate', specify the pressure gradient: q_b
+    * if B.C. is 'no_flow', don't specify any value
+    no_block = boundary block location
+    Input example: Boundary at grid block 4 has constant pressure gradient of 0.5 psi/ft.
+    Grid properties dx, dy, dz, kx, mu, B are known.
+    > boundary_floweq1d('constant_pressuregrad', dx=dx, dy=dx, dz=dz, kx=kx, mu=mu, B=B, p_grad=0.1, no_block=4)
+    Output:
+    qsc = flow equation (string format)
+    * if B.C. is 'constant_pressure',
+    e.g.: '0.757 (3000 - p(2,1))')
+    where: 0.757 is the calculated transmissibility, 3000 is the p_b, and (2,1)
+    is the no_block (boundary location)
+    * if B.C. is 'constant_pressuregrad',
+    e.g.: '100.5'
+    where: 100.5 is the calculated flow rate
+    * if B.C. is 'constant_rate',
+    e.g.: '100.5'
+    where: 10.5 is exactly the flow rate
+    * if B.C. is 'no_flow',
+    e.g.: '0.'
+    where: 0 is exactly the flow rate (no flow)
+    """
+    import numpy as np
+    if bound_type == 'constant_pressure':
+        Ax = dy * dz
+        T = .001127 * (kx * Ax) / (mu * B * 0.5 * dx)
+        qsc = '{} ({} - p{})'.format(T, value, no_block)
+
+    if bound_type == 'constant_pressuregrad':
+        Ax = dy * dz
+        qsc = '{}'.format(np.round((.001127 * (kx * Ax) / (mu * B)) * (value - 0), 5))  # Eq 4.45, zero (p_grad - 0) because Z1=Z2
+
+    if bound_type == 'constant_rate':
+        qsc = '{}'.format(value)
+
+    if bound_type == 'no_flow':
+        qsc = 0
+
+    return qsc
+
 def boundary_floweq2d(bound_type, bound_loc, dx, dy, dz, kx, ky, mu, B, value, no_block=(2,1), no_blocks_shared=4):
     """
     Boundary Conditions for 2D Rectangular Reservoir (floweq simulation)
