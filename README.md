@@ -39,7 +39,7 @@
 
 ### Intermediate 
 
-> Varying boundary conditions in different sides of the reservoir, and varying well operating conditions, wellbore radius, and skin.
+> Varying boundary conditions in different sides of the reservoir, and varying well operating conditions, configurations, wellbore radius, and skin.
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
