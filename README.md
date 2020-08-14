@@ -43,6 +43,7 @@
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90242937-235ce400-de58-11ea-9903-40ce8ef8feae.png" width="300"/></div>||||
 
 ### Advanced 
 
@@ -50,6 +51,7 @@
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>||||
 
 ## Challenging Case
 
