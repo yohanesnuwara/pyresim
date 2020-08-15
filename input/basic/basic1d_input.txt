@@ -1,0 +1,71 @@
+----------------
+RESERVOIR DESCRIPTION
+----------------
+
+GEOM  PROP    FLUID
+REG   HOMOG   1PHASE
+
+----------------
+RESERVOIR INPUT
+----------------
+
+NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	
+10	0   0	  300	350	40	270	0	  0	  0.2	  50	0	    3.5	1
+
+----------------
+WELL INPUT
+----------------
+
+WELLNAME
+A,B,C,D,E
+
+BLOCK COORD X
+1,4,6,8,10
+
+BLOCK COORD Y
+0,0,0,0,0
+
+RADIUS
+3.5,2.5,2,4,3.5
+
+SKIN
+1.5,0.1,0,0.1,0
+
+COND
+constant_fbhp,constant_rate,shutin,constant_rate,constant_rate
+
+VALUE
+3900,-150,0,250,-100
+
+CONFIG
+0,0,0,0,2
+
+----------------
+RESERVOIR BOUNDARY
+----------------
+
+-----
+WEST
+-----
+
+LOC
+all
+
+TYPE
+constant_pressure
+
+VALUE
+4000
+
+-----
+EAST
+-----
+
+LOC
+all
+
+TYPE
+constant_pressuregrad
+
+VALUE
+-0.5
