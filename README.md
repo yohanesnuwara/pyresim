@@ -36,7 +36,7 @@
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90313676-90e04180-df38-11ea-879b-8a553431a8a4.png" width="300"/></div>|A 1D non-elevated reservoir bounded by constant<br> rate in the west side and no flow in the east side. Five wells<br> penetrates the reservoir, with contant rate, similar<br> wellbore size, and no skin.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/basic/PyReSim_basic1d_case1.ipynb)|
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90313743-2bd91b80-df39-11ea-9153-3e138a951508.png" width="300"/></div>|A 1D non-elevated reservoir bounded by constant<br> rate in the west side and no flow in the east side. Five wells<br> penetrates the reservoir, with contant rate, similar<br> wellbore size, and no skin.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/basic/PyReSim_basic1d_case1.ipynb)|
 
 ### Intermediate 
 
