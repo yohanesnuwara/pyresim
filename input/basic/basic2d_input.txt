@@ -26,16 +26,16 @@ BLOCK COORD Y
 10,40,40,10,25
 
 RADIUS
-3,3.5,4,3,2.5
+3.5,3.5,3.5,3.5,3.5
 
 SKIN
-0,0.5,0,0,1
+0,0,0,0,0
 
 COND
-constant_fbhp,constant_rate,constant_rate,constant_fbhp,constant_rate
+constant_rate,constant_rate,constant_rate,constant_rate,constant_rate
 
 VALUE
-2000,-600,350,3000,-150
+-100,-150,-100,-200,500
 
 CONFIG
 0,0,0,0,0
@@ -65,10 +65,10 @@ LOC
 all
 
 TYPE
-no_flow
+constant_pressure
 
 VALUE
-0
+3000
 
 -----
 SOUTH
@@ -78,10 +78,10 @@ LOC
 all
 
 TYPE
-constant_pressuregrad
+constant_pressure
 
 VALUE
--0.2
+3000
 
 -----
 NORTH
@@ -91,7 +91,7 @@ LOC
 all
 
 TYPE
-constant_rate
+constant_pressure
 
 VALUE
--100
+3000
