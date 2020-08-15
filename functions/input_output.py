@@ -50,8 +50,9 @@ def read_input(filepath):
     # reservoir is 1D
 
     ## create reservoir input dictionary
-    reservoir_input = {'xi': xi, 'dx': dx, 'kx': kx, 'poro': poro, 'rho': rho, 
-                       'cpore': cpore, 'mu': mu, 'B': B}
+    reservoir_input = {'xi': xi, 'dx': dx, 'dy': dy, 'dz': dz, 'kx': kx, 
+                       'poro': poro, 'rho': rho, 'cpore': cpore, 
+                       'mu': mu, 'B': B}
 
     # well input
     skiprow_wells = np.array([22,25,28,31,37,40])
