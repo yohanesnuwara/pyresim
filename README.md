@@ -51,7 +51,7 @@
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>|A 1D non-elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|||
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>|A 1D elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|||
 
 ## Challenging Case
 
