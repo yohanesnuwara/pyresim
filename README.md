@@ -30,30 +30,6 @@
 |:--:|:--:|:--:|:--:|:--:|
 |1|<div><img src="https://user-images.githubusercontent.com/51282928/90217017-50929d80-de2a-11ea-8bb1-560b2ff2365c.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-1)|A gas-free oil in a 2D reservoir with uniform<br> grid dimension. Reservoir boundary in the west<br> has constant pressure, in the east is sealed (no flow),<br> in the south has pressure gradient, and in the<br> north has constant rate. Five wells penetrates<br> the reservoir, with various wellbore radius,<br> skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/blob/master/input/teasers/teaser1_input.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/teasers/PyReSim_teaser1.ipynb)|
 
-## Simulation Cases
-
-### Basic
-
-|Case No.|Picture|Description|Input data|Simulator|
-|:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90313743-2bd91b80-df39-11ea-9153-3e138a951508.png" width="300"/></div>|A 1D non-elevated reservoir bounded by constant<br> rate in the west side and no flow in the east side. Three wells<br> penetrates the reservoir, with contant rate, similar<br> wellbore size, and no skin.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/basic/basic1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/basic/PyReSim_basic1d_case1.ipynb)|
-
-### Intermediate 
-
-> Varying boundary conditions in different sides of the reservoir, and varying well operating conditions, configurations, wellbore radius, and skin.
-
-|Case No.|Picture|Description|Input data|Simulator|
-|:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90242937-235ce400-de58-11ea-9903-40ce8ef8feae.png" width="300"/></div>|A 1D non-elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/intermediate/intermediate1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/intermediate/intermediate1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/intermediate/PyReSim_intermediate1d_case1.ipynb)|
-
-### Advanced 
-
-> Giving uneven distributions of multiple boundary conditions, and giving elevation to the grid blocks. 
-
-|Case No.|Picture|Description|Input data|Simulator|
-|:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>|A 1D elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/advanced/advanced1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/advanced/advanced1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/advanced/PyReSim_advanced1d_case1.ipynb)|
-
 ## Challenging Case
 
 PyReSim will be performed to a more challenging case. This case is obtained from a "Chapter Project" in *Basic Applied Reservoir Simulation* (Ertekin, Abou-Kassem, King; 2001). In this case, the reservoir geometry is complex (irregular boundary, varied grid size) and reservoir property is heterogeneous. [See more details of this case](https://github.com/yohanesnuwara/pyresim/blob/master/docs/challenge_description.md)
