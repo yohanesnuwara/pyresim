@@ -61,6 +61,7 @@ def read_input(filepath):
       wells.append(well)
 
     well_xsc, well_rw, well_skin, well_value, well_config = wells[0], wells[2], wells[3], wells[4], wells[5]
+    
     well_name = np.loadtxt(filepath, max_rows=1, skiprows=19, delimiter=',', dtype=np.str) 
     well_condition = np.loadtxt(filepath, max_rows=1, skiprows=34, delimiter=',', dtype=np.str)
 
@@ -78,28 +79,24 @@ def read_input(filepath):
     # reservoir boundary
     skiprow_type = np.array([54, 67])
     skiprow_value = np.array([57, 70])
-    skiprow_loc = np.array([51, 64])
 
-    btype = []; bvalue = []; bloc = []
+    btype = []; bvalue = []
     for i in range(len(skiprow_type)):
       type = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_type[i], dtype=np.str)
       value = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_value[i])
-      loc = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_loc[i], dtype=np.str)
-      btype.append(type); bvalue.append(value); bloc.append(loc)
+      # loc = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_loc[i], dtype=np.str)
+      btype.append(type); bvalue.append(value)
 
     west_type, east_type = btype[0], btype[1]
     west_value, east_value = bvalue[0], bvalue[1]
-    west_loc, east_loc = bloc[0], bloc[1]
 
     ## create reservoir boundary information
 
     east_boundary = {"type": east_type,
-                      "value": east_value,
-                      "loc": east_loc}
+                      "value": east_value}
 
     west_boundary = {"type": west_type,
-                      "value": west_value,
-                      "loc": west_loc} 
+                      "value": west_value} 
 
     return reservoir_input, well, west_boundary, east_boundary 
 
@@ -148,7 +145,7 @@ def read_input(filepath):
     for i in range(len(skiprow_type)):
       type = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_type[i], dtype=np.str)
       value = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_value[i])
-      loc = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_loc[i], dtype=np.str)
+      loc = np.loadtxt(filepath, max_rows=1, skiprows=skiprow_loc[i], dtype=np.str)      
       btype.append(type); bvalue.append(value); bloc.append(loc)
 
     west_type, east_type, south_type, north_type = btype[0], btype[1], btype[2], btype[3]
