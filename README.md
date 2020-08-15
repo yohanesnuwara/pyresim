@@ -52,7 +52,7 @@
 
 |Case No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
-|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>|A 1D elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|||
+|1|<div><img src="https://user-images.githubusercontent.com/51282928/90243270-c7468f80-de58-11ea-8491-a91612ae20c7.png" width="300"/></div>|A 1D elevated reservoir bounded by constant<br> pressure boundary in the west side and constant<br> pressure gradient in the east side. Five wells<br> penetrates the reservoir, with various wellbore<br> radius, skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/advanced/advanced1d_input.txt)<br><br>[`depth file`](https://github.com/yohanesnuwara/pyresim/tree/master/input/advanced/advanced1d_depth.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/advanced/PyReSim_advanced1d_case1.ipynb)|
 
 ## Challenging Case
 
