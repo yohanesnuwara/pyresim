@@ -109,6 +109,8 @@ def rhs_constant1d_welltype(solver, bound_type, block_location, well_df, potenti
   potential_term = potential calculated using 'potential1d', 'potential2d', and 'potential3d'
   (for grid with ELEVATION only. If there's no ELEVATION, potential_term = 0)
   """  
+  import numpy as np
+  
   if solver=='incompressible':  
     if bound_type=='constant_pressure':
       rhs = 0 - (T_pb * p_b) + potential_term
