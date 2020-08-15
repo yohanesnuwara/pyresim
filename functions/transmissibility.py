@@ -15,7 +15,7 @@ def transmissibility1d_boundary(bound_type, dx, dy, dz, kx, mu, B):
     T = 0    
   return T
 
-def transmissibility2d_boundary(bound_loc, bound_type, dx, dy, dz, kx, mu, B):
+def transmissibility2d_boundary(bound_loc, bound_type, dx, dy, dz, kx, ky, mu, B):
   """
   Calculate the transmissibility at boundary (specifically for constant pressure B.C.)
   2D reservoir
