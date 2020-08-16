@@ -70,6 +70,117 @@ def boundary2d_location(x, y, xi, yi):
   
   return T_identify
 
+def boundary2d_irreg(bound_loc, xi, yi):
+  """ 
+  Classify boundary for transmissibility
+  Irregular reservoir (with inactive blocks as NaN)
+
+  Input:
+
+  bound_loc = the boundary location codes as previously passed by 'boundary2d_location'
+  xi, yi = dimension of reservoir
+  """
+  import numpy as np
+
+  for i in range(xi):
+    for j in range(yi):
+      if bound_loc[i,j]==13:
+        if bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=134
+        if bound_loc[i+1,j]!=bound_loc[i+1,j]:
+          bound_loc[i,j]=123        
+
+      if bound_loc[i,j]==14:
+        if bound_loc[i,j-1]!=bound_loc[i,j-1]:
+          bound_loc[i,j]=134   
+        if bound_loc[i+1,j]!=bound_loc[i+1,j]:
+          bound_loc[i,j]=124        
+
+      if bound_loc[i,j]==23:
+        if bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=234
+        if bound_loc[i-1,j]!=bound_loc[i-1,j]:
+          bound_loc[i,j]=123     
+
+      if bound_loc[i,j]==24:
+        if bound_loc[i,j-1]!=bound_loc[i,j-1]:
+          bound_loc[i,j]=234 
+        if bound_loc[i-1,j]!=bound_loc[i-1,j]:
+          bound_loc[i,j]=124          
+
+      if bound_loc[i,j]==1:
+        if bound_loc[i,j+1]!=bound_loc[i,j+1] and bound_loc[i,j-1]==bound_loc[i,j-1]:
+          bound_loc[i,j]=14
+        if bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=13
+        if bound_loc[i,j+1]!=bound_loc[i,j+1] and bound_loc[i,j-1]!=bound_loc[i,j-1]:
+          bound_loc[i,j]=134 
+        if bound_loc[i+1,j]!=bound_loc[i+1,j]: 
+          bound_loc[i,j]=12       
+
+      if bound_loc[i,j]==2:
+        if bound_loc[i,j+1]!=bound_loc[i,j+1] and bound_loc[i,j-1]==bound_loc[i,j-1]:
+          bound_loc[i,j]=24
+        if bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=23
+        if bound_loc[i,j+1]!=bound_loc[i,j+1] and bound_loc[i,j-1]!=bound_loc[i,j-1]:
+          bound_loc[i,j]=234 
+        if bound_loc[i-1,j]!=bound_loc[i-1,j]: 
+          bound_loc[i,j]=12         
+
+      if bound_loc[i,j]==3:
+        if bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i-1,j]==bound_loc[i-1,j]:
+          bound_loc[i,j]=23
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j]:
+          bound_loc[i,j]=13
+        if bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i-1,j]!=bound_loc[i-1,j]:
+          bound_loc[i,j]=123
+        if bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=34           
+
+      if bound_loc[i,j]==4:
+        if bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i-1,j]==bound_loc[i-1,j]:
+          bound_loc[i,j]=24
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j]:
+          bound_loc[i,j]=14
+        if bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i-1,j]!=bound_loc[i-1,j]:
+          bound_loc[i,j]=124
+        if bound_loc[i,j-1]!=bound_loc[i,j-1]:
+          bound_loc[i,j]=34         
+      
+      if bound_loc[i,j]==0:
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=1
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=2 
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=3
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=4 
+
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=13
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=23 
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=14
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=24    
+
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=134
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=124
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=134
+
+        if bound_loc[i-1,j]!=bound_loc[i-1,j] and bound_loc[i+1,j]!=bound_loc[i+1,j] and bound_loc[i,j-1]==bound_loc[i,j-1] and bound_loc[i,j+1]==bound_loc[i,j+1]:
+          bound_loc[i,j]=12
+        if bound_loc[i-1,j]==bound_loc[i-1,j] and bound_loc[i+1,j]==bound_loc[i+1,j] and bound_loc[i,j-1]!=bound_loc[i,j-1] and bound_loc[i,j+1]!=bound_loc[i,j+1]:
+          bound_loc[i,j]=34
+
+  return bound_loc 
+
 def boundary_flow2d_constant_pressuregrad(bound_loc, value, potential_term, kx, ky, dx, dy, dz, mu, B):
   
   import numpy as np
