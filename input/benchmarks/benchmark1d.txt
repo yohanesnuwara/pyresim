@@ -9,36 +9,36 @@ REG   HOMOG   1PHASE
 RESERVOIR INPUT
 ----------------
 
-NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	
-10	0   0	  300	350	40	270	0	  0	  0.2	  50	0	    3.5	1
+NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B CFLUID	
+4	  0   0	  300	350	40	270	0	  0	  0.2	  50	0	    3.5	1 1
 
 ----------------
 WELL INPUT
 ----------------
 
 WELLNAME
-A,B,C,D,E
+A,B
 
 BLOCK COORD X
-1,4,6,8,10
+4,2
 
 BLOCK COORD Y
-0,0,0,0,0
+0,0
 
 RADIUS
-3.5,2.5,2,4,3.5
+3.5,2
 
 SKIN
-1.5,0.1,0,0.1,0
+1.5,0
 
 COND
-constant_fbhp,constant_rate,shutin,constant_rate,constant_rate
+constant_rate,no_flow
 
 VALUE
-3900,-150,0,250,-100
+-600,0
 
 CONFIG
-0,0,0,0,2
+0,0
 
 ----------------
 RESERVOIR BOUNDARY
@@ -65,7 +65,7 @@ LOC
 all
 
 TYPE
-constant_pressuregrad
+no_flow
 
 VALUE
--0.5
+0
