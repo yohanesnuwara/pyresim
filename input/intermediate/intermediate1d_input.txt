@@ -9,8 +9,8 @@ REG   HOMOG   1PHASE
 RESERVOIR INPUT
 ----------------
 
-NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	
-10	0   0	  300	350	40	270	0	  0	  0.2	  50	0	    3.5	1
+NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	  CFLUID
+10	0   0	  300	350	40	270	0	  0	  0.2	  50	0	    3.5	1   0
 
 ----------------
 WELL INPUT
