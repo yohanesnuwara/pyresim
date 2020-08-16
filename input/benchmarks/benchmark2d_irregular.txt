@@ -2,43 +2,43 @@
 RESERVOIR DESCRIPTION
 ----------------
 
-GEOM  PROP    FLUID
-REG   HOMOG   1PHASE
+GEOM    PROP    FLUID
+IRREG   HOMOG   1PHASE
 
 ----------------
 RESERVOIR INPUT
 ----------------
 
 NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	
-50	50  0	  100	150	75	150	100	0	  0.2	  50	0	    3.5	1
+3	  3   0	  400	400	50	150	100	0	  0.2	  55	0	    3	  1
 
 ----------------
 WELL INPUT
 ----------------
 
 WELLNAME
-A,B,C,D,E
+A,B,C
 
 BLOCK COORD X
-10,40,10,40,25
+2,3,1
 
 BLOCK COORD Y
-10,40,40,10,25
+1,2,3
 
 RADIUS
-3,3.5,4,3,2.5
+3,3,3
 
 SKIN
-0,0.5,0,0,1
+0,0,0
 
 COND
-constant_fbhp,constant_rate,constant_rate,constant_fbhp,constant_rate
+constant_fbhp,constant_fbhp,constant_rate
 
 VALUE
-2000,-600,350,3000,-150
+3500,3500,-1000
 
 CONFIG
-0,0,0,0,0
+0,0,0
 
 ----------------
 RESERVOIR BOUNDARY
@@ -52,10 +52,10 @@ LOC
 all
 
 TYPE
-constant_pressure
+no_flow
 
 VALUE
-3000
+0
 
 -----
 EAST
@@ -78,10 +78,10 @@ LOC
 all
 
 TYPE
-constant_pressuregrad
+no_flow
 
 VALUE
--0.2
+0
 
 -----
 NORTH
@@ -91,7 +91,7 @@ LOC
 all
 
 TYPE
-constant_rate
+no_flow
 
 VALUE
--100
+0
