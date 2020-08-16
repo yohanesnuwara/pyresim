@@ -4,7 +4,10 @@
 """
 
 def boundary2d_location(x, y, xi, yi):
-  " Classify boundary for transmissibility"
+  """ 
+  Classify boundary for transmissibility
+  Regular reservoir (without any inactive blocks)
+  """
   
   import numpy as np
 
@@ -64,48 +67,6 @@ def boundary2d_location(x, y, xi, yi):
             # the interior blocks
             # no boundary flow
             T_identify[i,j] = transms(x, y, i, j, 0)
-
-#   ## There are irregularities in the gridblocks, so next we modify
-#   ## the irregular boundary transmissibilities 
-#   for a, i, b in zip(range(0, xi-2), range(1, xi-1), range(2, xi)):
-#     for c, j, d in zip(range(0, yi-2), range(1, yi-1), range(2, yi)):
-
-#       if x[i,j] == x[i,j]:
-#         if x[i-1,j] != x[i-1,j]:
-
-#           if x[i,j-1] != x[i,j-1]:
-#             T_identify[i,j] = 13
-#           if x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 14
-#           if x[i,j-1] != x[i,j-1] and x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 134
-#           if x[i,j-1] == x[i,j-1] and x[i,j+1] == x[i,j+1]:
-#             T_identify[i,j] = 1
-
-#         if x[i+1,j] != x[i+1,j]:
-
-#           if x[i,j-1] != x[i,j-1]:
-#             T_identify[i,j] = 23
-#           if x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 24
-#           if x[i,j-1] != x[i,j-1] and x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 234
-#           if x[i,j-1] == x[i,j-1] and x[i,j+1] == x[i,j+1]:
-#             T_identify[i,j] = 2  
-
-#         if x[i-1,j] == x[i-1,j] and x[i+1,j] == x[i+1,j]:
-
-#           if x[i,j-1] != x[i,j-1]:
-#             T_identify[i,j] = 3
-#           if x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 4                   
-
-#         if x[i-1,j] != x[i-1,j] and x[i+1,j] != x[i+1,j]:
-
-#           if x[i,j-1] != x[i,j-1]:
-#             T_identify[i,j] = 123
-#           if x[i,j+1] != x[i,j+1]:
-#             T_identify[i,j] = 124
   
   return T_identify
 
