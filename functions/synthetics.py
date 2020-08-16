@@ -25,7 +25,8 @@ def synthetic_halves_boundary(xi, yi):
   s_b1, s_b2 = each halves of the south boundary coordinates
   n_b1, n_b2 = each halves of the north boundary coordinates      
   """
-
+  import numpy as np
+  
   w_b1 = []; e_b1 = []
   for i in range(1,np.int((0.5*yi)+1)):
     arr1 = [1,i]
