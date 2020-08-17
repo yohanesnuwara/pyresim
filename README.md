@@ -29,7 +29,7 @@
 |Teaser No.|Picture|Description|Input data|Simulator|
 |:--:|:--:|:--:|:--:|:--:|
 |1|<div><img src="https://user-images.githubusercontent.com/51282928/90217017-50929d80-de2a-11ea-8bb1-560b2ff2365c.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-1)|A gas-free oil in a 2D reservoir with uniform<br> grid dimension. Reservoir boundary in the west<br> has constant pressure, in the east is sealed (no flow),<br> in the south has pressure gradient, and in the<br> north has constant rate. Five wells penetrates<br> the reservoir, with various wellbore radius,<br> skin, and operating conditions.|[`input file`](https://github.com/yohanesnuwara/pyresim/blob/master/input/teasers/teaser1_input.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/teasers/PyReSim_teaser1.ipynb)|
-|2|<div><img src="https://user-images.githubusercontent.com/51282928/90431371-21fb1800-e0f3-11ea-9afc-2921fa94e196.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-1)||Coming soon|Coming soon|
+|2|<div><img src="https://user-images.githubusercontent.com/51282928/90431371-21fb1800-e0f3-11ea-9afc-2921fa94e196.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-1)|A 2D reservoir with irregular boundaries<br> hosting a volatile oil. The reservoir is bounded<br> by a constant pressure. 2 wells penetrate into the<br> reservoir, and the flow rate as well as FBHP will be<br> reported after 20 days.<br>|Coming soon|Coming soon|
 
 ## Challenging Case
 
