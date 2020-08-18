@@ -3,7 +3,8 @@
 @email: ign.nuwara97@gmail.com
 """
 
-def lhs_coeffs1d_welltype(bound_loc, block_location, well_df, qsc, T_plus, T_min):
+def lhs_coeffs1d_welltype(bound_loc, block_location, well_df, qsc, T_plus, T_min, 
+                          solver='slicomp', reservoir_input=None, timestep=1):
   """
   Calculate the Left-hand side (LHS) coefficients of p+, p-, and p
   1D reservoir
@@ -30,7 +31,48 @@ def lhs_coeffs1d_welltype(bound_loc, block_location, well_df, qsc, T_plus, T_min
       # None
       p_plus, p_min, p = T_plus, T_min, -(T_min + T_plus) 
 
-  return p_plus, p_min, p
+  " SOLVER "
+
+  if solver=='incompressible':
+    return p_plus, p_min, p         
+  
+  if solver=='slicomp':
+    Vb = reservoir_input['dx'] * reservoir_input['dy'] * reservoir_input['dz']
+    ct = reservoir_input['cpore'] + reservoir_input['cfluid']
+    rhs_term = (Vb * reservoir_input['poro'] * ct) / (5.614583 * reservoir_input['B'] * timestep)
+
+    # modify coefficient of p
+    p = p - rhs_term
+    return p_plus, p_min, p
+
+# def lhs_coeffs1d_welltype(bound_loc, block_location, well_df, qsc, T_plus, T_min):
+#   """
+#   Calculate the Left-hand side (LHS) coefficients of p+, p-, and p
+#   1D reservoir
+#   """
+#   df = well_df.loc[well_df['well_loc'] == block_location]
+#   if df['well_condition'].values=='constant_fbhp':
+#     # well in constant FBHP condition
+#     Gw, mu, B = df['well_Gw'], df['well_mu'], df['well_B']
+#     if bound_loc=='west':
+#       p_plus, p_min, p = T_plus, 0, -((Gw / (mu * B)) + T_min + T_plus)
+#     if bound_loc=='east':
+#       p_plus, p_min, p = 0, T_min, -((Gw / (mu * B)) + T_min + T_plus) 
+#     else: 
+#       # None
+#       p_plus, p_min, p = T_plus, T_min, -((Gw / (mu * B)) + T_min + T_plus)  
+
+#   else:
+#     # well is either in constant pressure gradient, constant rate, OR no flow
+#     if bound_loc=='west':
+#       p_plus, p_min, p = T_plus, 0, -(T_min + T_plus)
+#     if bound_loc=='east':
+#       p_plus, p_min, p = 0, T_min, -(T_min + T_plus) 
+#     else: 
+#       # None
+#       p_plus, p_min, p = T_plus, T_min, -(T_min + T_plus) 
+
+#   return p_plus, p_min, p
 
 def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B, 
                           solver='slicomp', reservoir_input=None, timestep=1):
@@ -106,7 +148,10 @@ def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B,
     p = p - rhs_term
     return px_min, px_plus, py_min, py_plus, p  
   
-def rhs_constant1d_welltype(solver, bound_type, block_location, well_df, potential_term, qsc_b=None, T_pb=None, p_b=None):
+def rhs_constant1d_welltype(bound_type, block_location, well_df, 
+                            potential_term, qsc_b=None, T_pb=None, p_b=None,
+                            solver='slicomp', p_initial=None, reservoir_input=None, 
+                            timestep=1):
   """
   Calculate the Right-hand side (RHS) constants (1D reservoir)
 
@@ -115,14 +160,14 @@ def rhs_constant1d_welltype(solver, bound_type, block_location, well_df, potenti
   (for grid with ELEVATION only. If there's no ELEVATION, potential_term = 0)
   """  
   import numpy as np
-  
-  if solver=='incompressible':  
-    if bound_type=='constant_pressure':
-      rhs = 0 - (T_pb * p_b) + potential_term
-    if bound_type=='no_flow':
-      rhs = 0 + potential_term
-    if bound_type=='constant_pressuregrad' or bound_type=='constant_rate':
-      rhs = 0 - np.float64(qsc_b) + potential_term
+
+  # boundary conditions  
+  if bound_type=='constant_pressure':
+    rhs = 0 - (T_pb * p_b) + potential_term
+  if bound_type=='no_flow':
+    rhs = 0 + potential_term
+  if bound_type=='constant_pressuregrad' or bound_type=='constant_rate':
+    rhs = 0 - np.float64(qsc_b) + potential_term
 
   # well condition
   df = well_df.loc[well_df['well_loc'] == block_location]
@@ -130,23 +175,72 @@ def rhs_constant1d_welltype(solver, bound_type, block_location, well_df, potenti
     # well in constant FBHP condition
     Gw, mu, B, pwf = df['well_Gw'], df['well_mu'], df['well_B'], df['well_value']    
     rhs = rhs - (Gw / (mu * B)) * pwf
-
   if df['well_condition'].values=='constant_rate': 
     # well in constant rate condition
     qsc = df['well_value']
     rhs = rhs - qsc
-  
   if df['well_condition'].values=='constant_pressuregrad':
     # well in constant pressure gradient condition
     qsc = prodrate1d(df['well_condition'], p_grad=df['well_value'], Gw=df['well_Gw'], 
                     mu=df['well_mu'], B=df['well_B'], rw=df['well_rw'], 
                     kh=df['well_kh'], h=df['well_dz'])
     rhs = rhs - qsc
-  
   if df['well_condition'].values=='shutin':
     rhs = rhs
+
+  " SOLVERS "
+  if solver=='incompressible':
+    return rhs
+
+  if solver=='slicomp':
+    # add term 
+    Vb = reservoir_input['dx'] * reservoir_input['dy'] * reservoir_input['dz']
+    ct = reservoir_input['cpore'] + reservoir_input['cfluid']
+    rhs_term = (Vb * reservoir_input['poro'] * ct) / (5.614583 * reservoir_input['B'] * timestep)  
+    rhs = rhs - (rhs_term * p_initial)
+    return rhs  
   
-  return rhs 
+# def rhs_constant1d_welltype(solver, bound_type, block_location, well_df, potential_term, qsc_b=None, T_pb=None, p_b=None):
+#   """
+#   Calculate the Right-hand side (RHS) constants (1D reservoir)
+
+#   T_pb = transmissibility at boundary with constant pressure condition
+#   potential_term = potential calculated using 'potential1d', 'potential2d', and 'potential3d'
+#   (for grid with ELEVATION only. If there's no ELEVATION, potential_term = 0)
+#   """  
+#   import numpy as np
+  
+#   if solver=='incompressible':  
+#     if bound_type=='constant_pressure':
+#       rhs = 0 - (T_pb * p_b) + potential_term
+#     if bound_type=='no_flow':
+#       rhs = 0 + potential_term
+#     if bound_type=='constant_pressuregrad' or bound_type=='constant_rate':
+#       rhs = 0 - np.float64(qsc_b) + potential_term
+
+#   # well condition
+#   df = well_df.loc[well_df['well_loc'] == block_location]
+#   if df['well_condition'].values=='constant_fbhp':  
+#     # well in constant FBHP condition
+#     Gw, mu, B, pwf = df['well_Gw'], df['well_mu'], df['well_B'], df['well_value']    
+#     rhs = rhs - (Gw / (mu * B)) * pwf
+
+#   if df['well_condition'].values=='constant_rate': 
+#     # well in constant rate condition
+#     qsc = df['well_value']
+#     rhs = rhs - qsc
+  
+#   if df['well_condition'].values=='constant_pressuregrad':
+#     # well in constant pressure gradient condition
+#     qsc = prodrate1d(df['well_condition'], p_grad=df['well_value'], Gw=df['well_Gw'], 
+#                     mu=df['well_mu'], B=df['well_B'], rw=df['well_rw'], 
+#                     kh=df['well_kh'], h=df['well_dz'])
+#     rhs = rhs - qsc
+  
+#   if df['well_condition'].values=='shutin':
+#     rhs = rhs
+  
+#   return rhs 
 
 def rhs_constant2d_welltype(boundary_dict, well_dict, potential_term, 
                             dx, dy, dz, kx, ky, mu, B, solver='slicomp',
