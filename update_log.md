@@ -5,3 +5,7 @@
 * modify `read_input` to include reading `CFLUID` variable from input .TXT data
 * upload 2 benchmark 1D data: `benchmark1d_incomp` and `benchmark1d_slicomp`
 * 1D incompressible, 1D slightly compressible, 2D incompressible PASS the benchmark test
+
+18/08/2020
+* upload benchmark data for slightly compressible simulation for 2D reservoir, `benchmark2d_2x2_slicomp`
+* successfully created 2D simulation of slightly compressible
