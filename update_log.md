@@ -13,4 +13,4 @@
 * successfully created the well FBHP and rate simulation from 2D slightly compressible simulation
 
 19/08/2020
-* update function `lhs_coeffs2d_welltype` and `rhs_constant2d_welltype` for Slightly Compressible solver
+* update function `lhs_coeffs1d_welltype`, `lhs_coeffs2d_welltype`, `rhs_constant1d_welltype`, and `rhs_constant2d_welltype` for Slightly Compressible solver 1D and 2D
