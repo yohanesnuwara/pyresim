@@ -8,4 +8,5 @@
 
 18/08/2020
 * upload benchmark data for slightly compressible simulation for 2D reservoir, `benchmark2d_2x2_slicomp`
+* modify `lhs_coeffs2d_welltype` and `rhs_constant2d_welltype` to include `slicomp` (slightly compressible solver) for 2D reservoir
 * successfully created 2D simulation of slightly compressible
