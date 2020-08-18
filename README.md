@@ -19,7 +19,7 @@
 |Boundary conditions|Specified flow rate; Specified pressure; Specified pressure gradient; No flow|
 |Well details|Diameter; skin factor; location at the grid block (center, edge, or corner)|
 |Well-operating conditions|Specified flow rate (producer/injector well); Specified flowing borehole pressure (FBHP); Specified pressure gradient; Shut-in|
-|Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-water)|
+|Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-gas)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
 > (*) These aspects are still not available on the first launch (in November 2020). It will be available on the second launch (afterwards). 
