@@ -11,3 +11,6 @@
 * modify `lhs_coeffs2d_welltype` and `rhs_constant2d_welltype` to include `slicomp` (slightly compressible solver) for 2D reservoir
 * successfully created 2D simulation of slightly compressible
 * successfully created the well FBHP and rate simulation from 2D slightly compressible simulation
+
+19/08/2020
+* update function `lhs_coeffs2d_welltype` and `rhs_constant2d_welltype` for Slightly Compressible solver
