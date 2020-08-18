@@ -154,6 +154,7 @@ def well1d_report_slicomp(well_name, wells, well_df, p_sol_record, p_initial, sc
   well_report = output dataframe
   """
   import numpy as np
+  import pandas as pd
   
   def solution_well1d_slicomp(well_df, p_sol):
     if well_df['well_condition'] == 'constant_rate':
@@ -223,6 +224,7 @@ def well2d_report_slicomp(well_name, well_df, p_sol, schedule):
   well_report = output dataframe
   """
   import numpy as np
+  import pandas as pd
   
   def solution_well2d_slicomp(well_df, p_sol):
     if well_df['well_condition'].values == 'constant_rate':
