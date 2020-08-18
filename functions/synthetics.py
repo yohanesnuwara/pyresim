@@ -56,3 +56,16 @@ def synthetic_halves_boundary(xi, yi):
     n_b2.append(arr2) 
   
   return w_b1, w_b2, e_b1, e_b2, s_b1, s_b2, n_b1, n_b2
+
+def synthetic_initial_pressure2d(xi, yi, function='equilibrize', p_ref=4000):
+  """
+  Create synthetic initial pressure data for Slightly Compressible simulation
+  """
+  p_initial = np.zeros((xi,yi))
+
+  if function=='equilibrize':
+    for i in range(xi):
+      for j in range(yi):
+        p_initial[i,j] = p_ref
+
+    return p_initial 
