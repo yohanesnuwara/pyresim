@@ -61,6 +61,7 @@ def synthetic_initial_pressure2d(xi, yi, function='equilibrize', p_ref=4000):
   """
   Create synthetic initial pressure data for Slightly Compressible simulation
   """
+  import numpy as np
   p_initial = np.zeros((xi,yi))
 
   if function=='equilibrize':
