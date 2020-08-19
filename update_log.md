@@ -16,5 +16,4 @@
 * update function `lhs_coeffs1d_welltype`, `lhs_coeffs2d_welltype`, `rhs_constant1d_welltype`, and `rhs_constant2d_welltype` for Slightly Compressible solver 1D and 2D
 * add function `well1d_report_slicomp` and `well2d_report_slicomp` to calculate FBHP and rate of a well of interest, under Slightly Compressible simulation
 * 1D slightly compressible and 2D slightly compressible PASS the benchmark test
-* create `irregularity.py` that contains functions to handle irregular reservoir geometry
 * successfully created 2D incompressible simulation for irregular reservoir geometry !!
