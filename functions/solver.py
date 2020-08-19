@@ -545,3 +545,32 @@ def fill2d_rhs_mat(block_index, rhs_mat, rhs):
   i = block_index - 1
   rhs_mat[i,0] = rhs
   return rhs_mat
+
+def solve_pressure_irregular2d(lhs_mat, rhs_mat, x):
+  """
+  Process the LHS and RHS matrix, solve the matrix to get pressure solution,
+  and set up new pressure solution matrix including the INACTIVE BLOCKS
+  (N.b.: have np.linalg.inv inside)
+  """
+  import numpy as np
+  from gridding import fill_active_blocks
+
+  # get indexes of the rows from LHS matrix that contain all ZERO (inactive blocks)
+  indexes = np.where(np.all(lhs_mat == 0, axis=1))[0]
+
+  # delete rows in LHS matrix with the indexes above
+  # then also delete the columns
+  lhs_mat = np.delete(lhs_mat, indexes, axis=0)
+  lhs_mat = np.delete(lhs_mat, indexes, axis=1)
+
+  # delete rows in LHS matrix with the indexes above
+  rhs_mat = np.delete(rhs_mat, indexes, axis=0)
+
+  # solve the pressure
+  p_sol = np.linalg.solve(lhs_mat, rhs_mat)
+  p_sol = p_sol.T.reshape(-1)
+
+  # set up pressure matrix including the INACTIVE BLOCKS
+  p_sol = fill_active_blocks(p_sol, x)    
+
+  return p_sol
