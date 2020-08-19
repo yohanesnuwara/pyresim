@@ -17,3 +17,6 @@
 * add function `well1d_report_slicomp` and `well2d_report_slicomp` to calculate FBHP and rate of a well of interest, under Slightly Compressible simulation
 * 1D slightly compressible and 2D slightly compressible PASS the benchmark test
 * successfully created 2D incompressible simulation for irregular reservoir geometry !!
+
+20/08/2020
+* add and update functions to adapt the capability in 2D irregular simulation
