@@ -10,7 +10,7 @@ RESERVOIR INPUT
 ----------------
 
 NX	NY  NZ	DX	DY	DZ	KX	KY	KZ	PORO	RHO	CPORE	MU	B	  CFLUID
-3	  3   0	  400	400	50	150	100	0	  0.2	  55	0	    3	  1   0
+3	  3   0	  400	400	50	200	200	0	  0.19	55	0	    3	  1   0
 
 ----------------
 WELL INPUT
