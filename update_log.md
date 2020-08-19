@@ -20,3 +20,4 @@
 
 20/08/2020
 * add and update functions to adapt the capability in 2D irregular simulation
+* 2D IRREGULAR incompressible simulation PASS the benchmark test !
