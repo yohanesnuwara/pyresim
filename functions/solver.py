@@ -100,7 +100,25 @@ def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B,
     px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, Ty_plus, 0, -(A + T_sum)   
       
   if bound_loc==4:
-    px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, 0, Ty_min, -(A + T_sum)             
+    px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, 0, Ty_min, -(A + T_sum)
+
+  if bound_loc==123:
+    px_plus, px_min, py_plus, py_min, p = 0, 0, Ty_plus, 0, -(A + T_sum)       
+
+  if bound_loc==124:
+    px_plus, px_min, py_plus, py_min, p = 0, 0, 0, Ty_min, -(A + T_sum) 
+
+  if bound_loc==134:
+    px_plus, px_min, py_plus, py_min, p = Tx_plus, 0, 0, 0, -(A + T_sum)  
+
+  if bound_loc==234:
+    px_plus, px_min, py_plus, py_min, p = 0, Tx_min, 0, 0, -(A + T_sum) 
+
+  if bound_loc==12:
+    px_plus, px_min, py_plus, py_min, p = 0, 0, Ty_plus, Ty_min, -(A + T_sum) 
+
+  if bound_loc==34:
+    px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, 0, 0, -(A + T_sum)     
 
   # interior blocks              
   else: 
@@ -117,7 +135,81 @@ def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B,
 
     # modify coefficient of p
     p = p - rhs_term
-    return px_min, px_plus, py_min, py_plus, p  
+    return px_min, px_plus, py_min, py_plus, p    
+  
+# def lhs_coeffs2d_welltype(bound_loc, well_dict, T, mu, B, 
+#                           solver='slicomp', reservoir_input=None, timestep=1):
+#   """
+#   Calculate the Left-hand side (LHS) coefficients of p+, p-, and p
+#   2D reservoir
+#   """
+  
+#   import numpy as np
+  
+#   Tx_min, Tx_plus, Ty_min, Ty_plus = T[0], T[1], T[2], T[3]
+#   well_condition = well_dict['condition']
+#   Gw = well_dict['Gw']
+
+#   " Well term "
+#   if Gw!=Gw:
+#     # NaN, no well
+#     A = 0
+
+#   if Gw==Gw:
+#     # there is well
+#     if well_condition=='constant_fbhp':
+#       # well in constant FBHP condition     
+#       A = np.array(Gw) / (mu * B)
+#     else:
+#       A = 0
+
+#   " Transmissibility term "
+#   # summing the transmissibilities
+#   T_sum = Tx_plus + Tx_min + Ty_plus + Ty_min
+   
+#   " Calculate coefficients "
+
+#   # boundary blocks
+#   if bound_loc==1:
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, 0, Ty_plus, Ty_min, -(A + T_sum)
+
+#   if bound_loc==14:
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, 0, 0, Ty_min, -(A + T_sum)  
+
+#   if bound_loc==13:
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, 0, Ty_plus, 0, -(A + T_sum)  
+
+#   if bound_loc==2:
+#     px_plus, px_min, py_plus, py_min, p = 0, Tx_min, Ty_plus, Ty_min, -(A + T_sum) 
+
+#   if bound_loc==24:
+#     px_plus, px_min, py_plus, py_min, p = 0, Tx_min, 0, Ty_min, -(A + T_sum)  
+
+#   if bound_loc==23:
+#     px_plus, px_min, py_plus, py_min, p = 0, Tx_min, Ty_plus, 0, -(A + T_sum) 
+
+#   if bound_loc==3:
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, Ty_plus, 0, -(A + T_sum)   
+      
+#   if bound_loc==4:
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, 0, Ty_min, -(A + T_sum)             
+
+#   # interior blocks              
+#   else: 
+#     px_plus, px_min, py_plus, py_min, p = Tx_plus, Tx_min, Ty_plus, Ty_min, -(A + T_sum)  
+  
+#   " SOLVER "
+#   if solver=='incompressible':
+#     return px_min, px_plus, py_min, py_plus, p
+  
+#   if solver=='slicomp':
+#     Vb = reservoir_input['dx'] * reservoir_input['dy'] * reservoir_input['dz']
+#     ct = reservoir_input['cpore'] + reservoir_input['cfluid']
+#     rhs_term = (Vb * reservoir_input['poro'] * ct) / (5.614583 * reservoir_input['B'] * timestep)
+
+#     # modify coefficient of p
+#     p = p - rhs_term
+#     return px_min, px_plus, py_min, py_plus, p  
   
 def rhs_constant1d_welltype(bound_type, block_location, well_df, 
                             potential_term, qsc_b=None, T_pb=None, p_b=None,
@@ -318,7 +410,33 @@ def fill2d_lhs_mat(bound_loc, block_index, xi, lhs_mat, px_min, px_plus, py_min,
     lhs_mat[i,i-1] = px_min
     lhs_mat[i,i+1] = px_plus
     lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i] = p  
+
+  if bound_loc==123:
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i] = p 
+
+  if bound_loc==124:
+    lhs_mat[i,i-xi] = py_min
+    lhs_mat[i,i] = p 
+
+  if bound_loc==134:
+    lhs_mat[i,i+1] = px_plus
     lhs_mat[i,i] = p   
+
+  if bound_loc==234:
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i] = p 
+
+  if bound_loc==12:
+    lhs_mat[i,i+xi] = py_plus
+    lhs_mat[i,i-xi] = py_min    
+    lhs_mat[i,i] = p
+
+  if bound_loc==34:
+    lhs_mat[i,i+1] = px_plus    
+    lhs_mat[i,i-1] = px_min
+    lhs_mat[i,i] = p                            
 
   # Interior blocks
   if bound_loc==0:
@@ -328,7 +446,84 @@ def fill2d_lhs_mat(bound_loc, block_index, xi, lhs_mat, px_min, px_plus, py_min,
     lhs_mat[i,i+xi] = py_plus
     lhs_mat[i,i] = p
 
-  return lhs_mat
+  return lhs_mat  
+  
+# def fill2d_lhs_mat(bound_loc, block_index, xi, lhs_mat, px_min, px_plus, py_min, py_plus, p):
+#   """
+#   Fill the LHS coefficients into 2D matrix 
+#   For 2D reservoir
+
+#   Input:
+
+#   bound_loc = location of block coded (13, 14, 23, 24, etc.)
+#   block_index = block index matrix (created before simulation)
+#   xi = number of grid blocks in x-direction  
+#   lhs_mat = empty LHS matrix (created before simulation)
+#   px_min, px_plus, py_min, py_plus, p = coefficients of LHS
+
+#   Output:
+
+#   lhs_mat = LHS matrix has been filled with the LHS coefficients
+#   """
+  
+#   import numpy as np
+  
+#   i = block_index - 1
+
+#   # Boundary blocks
+#   if bound_loc==13:
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==23:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==14:
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==24:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==1:
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==2:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==3:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   if bound_loc==4:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i] = p   
+
+#   # Interior blocks
+#   if bound_loc==0:
+#     lhs_mat[i,i-1] = px_min
+#     lhs_mat[i,i+1] = px_plus
+#     lhs_mat[i,i-xi] = py_min
+#     lhs_mat[i,i+xi] = py_plus
+#     lhs_mat[i,i] = p
+
+#   return lhs_mat
 
 def fill2d_rhs_mat(block_index, rhs_mat, rhs):
   """
