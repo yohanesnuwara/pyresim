@@ -21,3 +21,4 @@
 20/08/2020
 * add and update functions to adapt the capability in 2D irregular simulation
 * 2D IRREGULAR incompressible simulation PASS the benchmark test !
+* Slightly compressible simulation done for Teaser2 case. Teaser2 is ready for launch :)
