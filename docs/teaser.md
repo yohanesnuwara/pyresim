@@ -50,6 +50,6 @@ Under this condition, pressure distribution in the reservoir behaves like **stea
 ## Teaser 2
 
 <p align="center">
-  <img width="300" height="300" src="https://user-images.githubusercontent.com/51282928/90748253-22b2ca80-e2fc-11ea-8b80-e3878aff7f77.png">
+  <img width="500" height="300" src="https://user-images.githubusercontent.com/51282928/90748253-22b2ca80-e2fc-11ea-8b80-e3878aff7f77.png">
 </p>
 
