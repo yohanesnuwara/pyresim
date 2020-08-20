@@ -61,30 +61,32 @@ Different from the Teaser 1, now volatile oil has larger fluid compressibility (
 
 |Geometry and property|Value|
 |:--:|:--:|
-|Number of grid blocks in x-direction|50|
-|Number of grid blocks in y-direction|50|
-|Grid block length|100 ft|
-|Grid block width|150 ft|
-|Grid block thickness|75 ft|
-|Permeability in x-direction|150 md|
-|Permeability in y-direction|100 md|
-|Porosity|0.2|
-|Formation compressibility|0 sip|
+|Original number of grid blocks in x-direction|12|
+|Original number of grid blocks in y-direction|9|
+|Grid block length|500 ft|
+|Grid block width|400 ft|
+|Grid block thickness|50 ft|
+|Permeability in x-direction|280 md|
+|Permeability in y-direction|280 md|
+|Porosity|0.23|
+|Formation compressibility|1 microsip|
+|Oil compressibility|10 microsip|
 |Oil viscosity|3.5 cp|
-|Oil FVF|1|
+|Oil FVF|1.5|
+
 
 **Reservoir boundary data**
 
 |Boundary|Condition|Value|
 |:--:|:--:|:--:|
-|West|Constant pressure|3,000 psi|
+|West|No flow|0 STB/D|
 |East|No flow|0 STB/D|
-|South|Constant pressure gradient|-0.2 psi/ft|
-|North|Constant rate|-100 STB/D|
+|South|No flow|0 STB/D|
+|North|No flow|0 STB/D|
 
 **Well input data**
 
-|Name|Radius|Skin|Condition|Value|
-|:--:|:--:|:--:|:--:|:--:|
-|W-1|3|0|Constant FBHP|2,000 psi|
-|W-3|3|0|Constant rate|-600 STB/D|
+|Name|Type|Radius|Skin|Condition|Value|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|W-1|Producer|3|0|Constant FBHP|4,000 psi|
+|W-3|Injector|3|0|Constant rate|2,600 STB/D|
