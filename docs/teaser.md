@@ -46,3 +46,10 @@ An incompressible gas-free oil in an incompressible 2D reservoir with uniform gr
 > An incompressible gas-free oil means it has `B` or FVF equals 1. An incompressible reservoir means it has pore compressibility `CPORE` equals 0. Check out the [input file](https://github.com/yohanesnuwara/pyresim/blob/master/input/teaser1.txt)
 
 Under this condition, pressure distribution in the reservoir behaves like **steady-state** (no change with time), hence, `incompressible` solver is used. 
+
+## Teaser 2
+
+<p align="center">
+  <img width="300" height="300" src="https://user-images.githubusercontent.com/51282928/90748253-22b2ca80-e2fc-11ea-8b80-e3878aff7f77.png">
+</p>
+
