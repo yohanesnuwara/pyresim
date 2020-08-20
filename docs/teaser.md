@@ -56,3 +56,35 @@ A 2D reservoir with irregular boundaries hosting a volatile oil. The reservoir b
 The irrregular reservoir is defined as in above figure, as the active blocks (orange color) and the inactive blocks (shaded blue color). Given each block notation.
 
 Different from the Teaser 1, now volatile oil has larger fluid compressibility (`CFLUID`) and larger FVF (`B`). Also the reservoir is an ideal compressible reservoir, with larger pore compressibility `CPORE`. Under this condition, pressure distribution will behave dynamic, hence the Slightly Compressible (`slicomp`) solver is used. 
+
+**Reservoir input data**
+
+|Geometry and property|Value|
+|:--:|:--:|
+|Number of grid blocks in x-direction|50|
+|Number of grid blocks in y-direction|50|
+|Grid block length|100 ft|
+|Grid block width|150 ft|
+|Grid block thickness|75 ft|
+|Permeability in x-direction|150 md|
+|Permeability in y-direction|100 md|
+|Porosity|0.2|
+|Formation compressibility|0 sip|
+|Oil viscosity|3.5 cp|
+|Oil FVF|1|
+
+**Reservoir boundary data**
+
+|Boundary|Condition|Value|
+|:--:|:--:|:--:|
+|West|Constant pressure|3,000 psi|
+|East|No flow|0 STB/D|
+|South|Constant pressure gradient|-0.2 psi/ft|
+|North|Constant rate|-100 STB/D|
+
+**Well input data**
+
+|Name|Radius|Skin|Condition|Value|
+|:--:|:--:|:--:|:--:|:--:|
+|W-1|3|0|Constant FBHP|2,000 psi|
+|W-3|3|0|Constant rate|-600 STB/D|
