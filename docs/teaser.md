@@ -8,6 +8,8 @@
 
 An incompressible gas-free oil in an incompressible 2D reservoir with uniform grid dimension. Reservoir boundary in the west has constant pressure, in the east is sealed (no flow), in the south has pressure gradient, and in the north has constant rate. Five wells penetrates the reservoir, with various wellbore radius, skin, and operating conditions.
 
+Under this condition, pressure distribution in the reservoir behaves like **steady-state** (no change with time), hence, Incompressible (`incompressible`) solver is used. 
+
 **Reservoir input data**
 
 |Geometry and property|Value|
@@ -43,13 +45,14 @@ An incompressible gas-free oil in an incompressible 2D reservoir with uniform gr
 |D|3.5|0.1|Constant FBHP|3,000 psi|
 |E|3.2|0|Constant rate|-150 STB/D|
 
-> An incompressible gas-free oil means it has `B` or FVF equals 1. An incompressible reservoir means it has pore compressibility `CPORE` equals 0. Check out the [input file](https://github.com/yohanesnuwara/pyresim/blob/master/input/teaser1.txt)
-
-Under this condition, pressure distribution in the reservoir behaves like **steady-state** (no change with time), hence, `incompressible` solver is used. 
-
 ## Teaser 2
 
 <p align="center">
   <img width="500" height="300" src="https://user-images.githubusercontent.com/51282928/90748253-22b2ca80-e2fc-11ea-8b80-e3878aff7f77.png">
 </p>
 
+A 2D reservoir with irregular boundaries hosting a volatile oil. The reservoir boundary is sealed of flow. 2 wells (injector and producer) penetrate into the reservoir, and the flow rate as well as FBHP will be reported after 50 days.
+
+The irrregular reservoir is defined as in above figure, as the active blocks (orange color) and the inactive blocks (shaded blue color). Given each block notation.
+
+Different from the Teaser 1, now volatile oil has larger fluid compressibility (`CFLUID`) and larger FVF (`B`). Also the reservoir is an ideal compressible reservoir, with larger pore compressibility `CPORE`. Under this condition, pressure distribution will behave dynamic, hence the Slightly Compressible (`slicomp`) solver is used. 
