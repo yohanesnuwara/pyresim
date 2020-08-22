@@ -1,0 +1,198 @@
+RUNSPEC ==============================================================
+-- Title is used as header on output, to identify run
+TITLE
+ Example simple Eclipse file, lecture notes
+-- Specify dimension of model, NX, NY, NZ
+
+DIMENS
+-- NX NY NZ
+ 10 3 3 /
+ 
+-- Phases included (oil and water, i.e. 2-phase run)
+OIL
+WATER
+
+-- Units to use, alternatives are METRIC, FIELD or LAB
+
+FIELD
+
+-- Specify maximum values for well data (# means “max number of”)
+WELLDIMS
+-- #wells #cell-connections Next three values are defaulted
+ 4 5 3* /
+
+-- Start date, i.e. “Day 0” in simulation
+START
+ 1 JAN 2004 /
+ 
+GRID ===========================================================
+-- Turn off writing of data to report file
+NOECHO
+
+-- Definition of grid cells. From DIMENS keyword above, we have:
+-- N = NX*NY*NZ = 10*3*3 = 90.
+-- In each cell DX = DY = 1000 ft and DZ = 50 ft
+-- (Dimension measured in feet since units were defined as FIELD above)
+-- The grid cells are then defined by:
+DX
+ 90*1000 /
+DY
+ 90*1000 /
+DZ
+ 90*50 /
+ 
+-- So far the grid shape has been defined, but we also need to define at
+-- which depth (measured from sea level) the cell tops are. We assume a
+-- horizontal reservoir, and input depths which are consistent with the
+-- DZ-values we defined above.
+TOPS
+ 30*5000 30*5050 30*5100 /
+ 
+-- Permeabilities are constant, so define 90 equal values.
+PERMX
+ 90*200 /
+PERMY
+ 90*200 /
+PERMZ
+ 90*200 /
+ 
+-- Porosity is constant in each layer, so define 30 values in layer 1,
+-- 30 in layer 2, and 30 in layer 3. Each layer contains 30 cells.
+PORO
+ 30*0.3
+ 30*0.23
+ 30*0.18 / 
+
+-- Request to write an INIT (initial) file. Contains all data used to
+-- initialize the model
+
+INIT
+-- Turn report writing back on
+ECHO
+
+PROPS ===============================================================
+
+-- Relative permeability for water and oil,
+-- and water-oil capillary pressure, as a function of water saturation
+SWOF
+-- Sw Krw Krow Pcow
+0.220 0.0000 1.0000 0
+0.300 0.0700 0.4000 0
+0.400 0.1500 0.1250 0
+0.500 0.2400 0.0649 0
+0.600 0.3300 0.0048 0
+0.800 0.6500 0.0 0
+0.900 0.8300 0.0 0
+1.000 1.0000 0.0 0 /
+
+-- PVT properties for water.
+-- (Pref: Reference pressure for rest of data (psi)
+-- Bw: Volume formation factor for water
+-- Cw: Water compressibiblity
+-- ViscW: Water viscosity )
+PVTW
+-- Pref Bw Cw ViscW
+ 4014.7 1.029 3.13E-6 0.31 0 /
+ 
+-- PVT properties for oil
+PVDO
+-- P Bo viscO
+ 3337 1.2600 1.042
+ 3725 1.2555 1.072
+ 4139.5 1.2507 1.096
+ 4573.2 1.2463 1.118
+ 5053.9 1.24173 1.151
+ 5487.5 1.2377 1.174
+ 5813.9 1.2356 1.2 /
+ 
+-- Dead oil: Rs (Gas resolution factor) is constant
+RSCONST
+-- Rs Bubble-point-pressure
+ 0.4 3337.0 /
+ 
+-- Specify constant rock compressibility.
+ROCK
+-- Pref Cr
+ 14.7 3.0D-6 /
+ 
+-- Fluid densities at surface conditions
+DENSITY
+-- Oil Water Gas
+ 49.1 64.79 0.06054 /
+ 
+SOLUTION =============================================================
+
+EQUIL
+-- DD = Datum depth, the depth to which all reports will be referenced.
+-- DD Pressure@DD OWC Pcow(OWC) Default rest of data items
+ 5000 4800 6000 0.0 6* / 
+
+SUMMARY ==============================================================
+
+-- List data vectors which we want stored for graphics post-processing
+
+-- Field Oil Production Rate
+FOPR
+-- Field Oil Production Total
+FOPT
+-- Field Water Cut
+FWCT
+-- Field Pressure (averaged reservoir pressure)
+FPR
+-- Field Oil In Place
+FOIP
+-- Field Water Production Rate
+FWPR
+-- Field Water Injection Rate
+FWIR
+-- Well Water Cut for all wells
+WWCT
+ /
+ 
+SCHEDULE ==============================================================
+
+-- Specify output of graphics result files for cell data, and times which
+-- to write these. (Details to come later)
+RPTRST
+ BASIC=5 NORST=1 FREQ=6 /
+ 
+-- Well specification: Give names, positions (i, j) and main phase of wells
+WELSPECS
+--wname group i j Z(bhp) prefPhase
+ WP1 G 10 2 1* OIL /
+/
+-- (Note two slashes, one terminates each well, one terminates the keyword)
+
+-- Completion data, the well is open to the reservoir in cells in layers
+-- from k_hi to k_lo.
+COMPDAT
+--wname ic jc k_hi k_lo open/shut 2*Don’tCare well_diam Default...
+ WP1 10 2 1 2 OPEN 2* 0.5 4* /
+ /
+ 
+-- Production data, specify producing rate and constraints
+-- Well WP1 will produce with an oil rate of 2000 STB/day constrained by
+-- that well’s flowing bottomhole pressure is minimum 3350 psi.
+-- (Details to come later)
+WCONPROD
+--wname open/shut ctrlmode orat 4*Default bhpmin Rest default...
+ WP1 OPEN ORAT 2000 4* 3350 /
+ /
+ 
+-- Milestone dates, e.g. to write results
+DATES
+ 1 JUL 2004 /
+ 1 JAN 2005 /
+/
+
+-- Change production rate to 4000 STB/day
+WCONPROD
+--wname open/shut ctrlmode orat 4*Default bhpmin Rest default...
+ WP1 OPEN ORAT 4000 4* 3350 /
+ /
+ 
+DATES
+ 1 JUL 2005 /
+ /
+ 
+END
