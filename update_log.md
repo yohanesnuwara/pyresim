@@ -25,3 +25,6 @@
 
 21/08/2020
 * Teaser 2 is available !
+
+22/08/2020
+* Upload 2 simulator notebooks for 1D and regular 2D simulation (incompressible and slicomp): `PyReSim1d.ipynb` and `PyReSim2d.ipynb`
