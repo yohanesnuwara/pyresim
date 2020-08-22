@@ -2,7 +2,7 @@
 
 #### Python reservoir simulation from single-phase simple reservoir to multi-phase complex reservoir 
 
-*) still on work. Progress bar ![30%](https://progress-bar.dev/30)
+*) still on work. Progress bar ![40%](https://progress-bar.dev/40)
 
 <p align="center">
   <img width="400" height="300" src="https://user-images.githubusercontent.com/51282928/90232288-a5dca800-de46-11ea-8b11-2d4bdbf3186e.png">
