@@ -77,3 +77,24 @@ Well input and reservoir boundary data are similar to **1D Intermediate** case, 
 |East|Constant pressure|3,000 psi|
 |South|Constant pressure|3,000 psi|
 |North|Constant pressure|3,000 psi|
+
+### Regular 2D Intermediate
+
+**Well input data**
+
+|Name|Location|Radius|Skin|Configuration|Condition|Value|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|A|(10,10)|3|0|0|Constant FBHP|2,000 psi|
+|B|(40,40)|3.5|0.5|0|Constant rate|-600 STB/D|
+|C|(10,40)|4|0|0|Constant rate|350 STB/D|
+|D|(40,10)|3|0|0|Constant FBHP|3,000 psi|
+|E|(25,25)|2.5|1|0|Constant rate|-150 STB/D|
+
+**Reservoir boundary data**
+
+|Boundary|Condition|Value|
+|:--:|:--:|:--:|
+|West|Constant pressure|3,000 psi|
+|East|No flow|0 STB/D|
+|South|Constant pressure gradient|-0.2 psi/ft|
+|North|Constant rate|-100 STB/D|
