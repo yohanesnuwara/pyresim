@@ -82,6 +82,7 @@ def constant_depth1d(z, xi):
   Output:
   z_array = grid block coordinates + depth of grid blocks (2D array)
   """
+  import numpy as np
   x = np.arange(1, xi+1)
   z = np.full(xi, z)
   z_array = np.array([x, z])
