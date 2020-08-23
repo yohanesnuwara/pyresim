@@ -32,12 +32,19 @@
 |2|<div><img src="https://user-images.githubusercontent.com/51282928/90431371-21fb1800-e0f3-11ea-9afc-2921fa94e196.png" width="200"/></div><br>[Click here for case description](https://github.com/yohanesnuwara/pyresim/blob/master/docs/teaser.md#teaser-2)|A 2D reservoir with irregular boundaries<br> hosting a volatile oil. The reservoir is bounded<br> by a constant pressure. 2 wells penetrate into the<br> reservoir, and the flow rate as well as FBHP will be<br> reported after 50 days.<br>|[`input file`](https://github.com/yohanesnuwara/pyresim/blob/master/input/teasers/teaser2_input.txt)|[`source code`](https://github.com/yohanesnuwara/pyresim/blob/master/simulators/teasers/PyReSim_teaser2.ipynb)|
 |3|<div><img src="https://user-images.githubusercontent.com/51282928/89118863-7b4c3000-d4d3-11ea-918d-8432b110b475.png" width="200"/></div>|The same 2D reservoir in Teaser 2, has now<br> elevations (Pseudo-3D). The reservoir hosts gas.<br> The reservoir is bounded by a constant pressure.<br> 2 wells penetrate into the reservoir, and the flow<br> rate as well as FBHP will be reported after 50 days.|Coming soon|Coming soon|
 
-
 ## Challenging Case
 
 PyReSim will be performed to a more challenging case. This case is obtained from a "Chapter Project" in *Basic Applied Reservoir Simulation* (Ertekin, Abou-Kassem, King; 2001). In this case, the reservoir geometry is complex (irregular boundary, varied grid size) and reservoir property is heterogeneous. [See more details of this case](https://github.com/yohanesnuwara/pyresim/blob/master/docs/challenge_description.md)
 
 <div><img src="https://user-images.githubusercontent.com/51282928/89013581-54a8c080-d33e-11ea-8f96-704e8b263c5c.png" width="300"/>  <img src="https://user-images.githubusercontent.com/51282928/89118272-894b8200-d4ce-11ea-9e02-6d18d3e48583.png" width="650"/></div>
+
+## Open for Contribution!
+
+These is a list contains several options for contributions:
+* Help writing and translating a reservoir data into Schlumberger ECLIPSE format
+* (Updated more soon)
+
+Let's make PyReSim better together. If you're confident to contribute, please let me know and [mail me](ign.nuwara97@gmail.com)
 
 ## License
 
