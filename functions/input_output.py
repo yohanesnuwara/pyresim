@@ -173,17 +173,33 @@ def read_input(filepath):
 
     return reservoir_input, well, west_boundary, east_boundary, south_boundary, north_boundary 
 
+# def read_depth(filepath):
+#   """
+#   Read from depth data
+#   """
+#   import numpy as np
+#   data = np.loadtxt(filepath, skiprows=1)
+#   x, y, depth = data[:,0], data[:,1], data[:,2]
+  
+#   if np.all(y==0):
+#     # reservoir grid is 1D
+#     return x, depth
+#   else:
+#     # reservoir grid is 2D
+#     return x, y, depth  
+
 def read_depth(filepath):
   """
   Read from depth data
   """
   import numpy as np
   data = np.loadtxt(filepath, skiprows=1)
-  x, y, depth = data[:,0], data[:,1], data[:,2]
+  x, y, z = data[:,0], data[:,1], data[:,2]
   
   if np.all(y==0):
     # reservoir grid is 1D
-    return x, depth
+    z_array = np.array([x, z])
   else:
     # reservoir grid is 2D
-    return x, y, depth  
+    z_array = np.array([x, y, z])    
+  return z_array
