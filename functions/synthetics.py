@@ -70,3 +70,19 @@ def synthetic_initial_pressure2d(xi, yi, function='equilibrize', p_ref=4000):
         p_initial[i,j] = p_ref
 
     return p_initial 
+
+def constant_depth1d(z, xi):
+  """
+  Create constant depth of 1D reservoir
+
+  Input:
+  z = depth of grid blocks (float)
+  xi = number of grid blocks in x-direction
+
+  Output:
+  z_array = grid block coordinates + depth of grid blocks (2D array)
+  """
+  x = np.arange(1, xi+1)
+  z = np.full(xi, z)
+  z_array = np.array([x, z])
+  return z_array  
