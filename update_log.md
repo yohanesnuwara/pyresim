@@ -28,3 +28,6 @@
 
 22/08/2020
 * Upload 2 simulator notebooks for 1D and regular 2D simulation (incompressible and slicomp): `PyReSim1d.ipynb` and `PyReSim2d.ipynb`
+
+23/08/2020
+* add simulation for elevated 1D reservoirs in `PyReSim1d.ipynb`
