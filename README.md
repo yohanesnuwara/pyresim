@@ -41,7 +41,7 @@ PyReSim will be performed to a more challenging case. This case is obtained from
 ## Open for Contribution!
 
 These is a list contains several options for contributions:
-* Help writing and translating a reservoir data into Schlumberger ECLIPSE format
+* Help writing and translating a reservoir data into Schlumberger ECLIPSE format, or JSON format
 * (Updated more soon)
 
 Let's make PyReSim better together. If you're confident to contribute, please let me know and [mail me](ign.nuwara97@gmail.com)
