@@ -141,34 +141,33 @@ def oil_fvf(P_bubble, api, Rsb, sg2, temp2, pressure2):
 
   Bo_array = []
 
-  for i in range(len(pressure2)):
-    if pressure2[i] < P_bubble: # use Vazquez-Beggs
-      if api <= 30:
-        # use Vazquez-Beggs 
-        c1 = 0.0362
-        c2 = 1.0937
-        c3 = 25.7240
-        c4 = 4.677E-4
-        c5 = 1.751E-5
-        c6 = -1.811E-8
-      if api > 30:
-        c1 = 0.0178
-        c2 = 1.187
-        c3 = 23.9310
-        c4 = 4.670E-4
-        c5 = 1.100E-5
-        c6 = 1.337E-9
-      Rsc = (pressure2[i]**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67))
-      Bo = 1 + (c4 * Rsc) + (c5 * (temp2 - 60) * (api / sg2)) + (c6 * Rsc *(temp2 - 60) * (api / sg2)) # temp in deg F
-    if pressure2[i] == P_bubble:
-      # use Levitan-Murtha
-      Bo = Bo_bubble
-    if pressure2[i] > P_bubble:
-      # use Levitan-Murtha
-      coil = ((5 * Rsb) + (17.2 * temp2) - (1180 * sg2) + (12.61 * api) - 1433) / (1E+05 * pressure2[i])
-      Bo = Bo_bubble * np.exp(coil * (P_bubble - pressure2[i]))
-    Bo_array.append(float(Bo))
-  return(Bo_array)
+  if pressure2 < P_bubble: # use Vazquez-Beggs
+    if api <= 30:
+      # use Vazquez-Beggs 
+      c1 = 0.0362
+      c2 = 1.0937
+      c3 = 25.7240
+      c4 = 4.677E-4
+      c5 = 1.751E-5
+      c6 = -1.811E-8
+    if api > 30:
+      c1 = 0.0178
+      c2 = 1.187
+      c3 = 23.9310
+      c4 = 4.670E-4
+      c5 = 1.100E-5
+      c6 = 1.337E-9
+    Rsc = (pressure2**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67))
+    Bo = 1 + (c4 * Rsc) + (c5 * (temp2 - 60) * (api / sg2)) + (c6 * Rsc *(temp2 - 60) * (api / sg2)) # temp in deg F
+  if pressure2 == P_bubble:
+    # use Levitan-Murtha
+    Bo = Bo_bubble
+  if pressure2 > P_bubble:
+    # use Levitan-Murtha
+    coil = ((5 * Rsb) + (17.2 * temp2) - (1180 * sg2) + (12.61 * api) - 1433) / (1E+05 * pressure2)
+    Bo = Bo_bubble * np.exp(coil * (P_bubble - pressure2))
+
+  return Bo
   
 def oil_mu(pressure2, P_bubble, sg2, api, temp2, Rsb):
   # Calculate viscosity of oil
@@ -176,51 +175,50 @@ def oil_mu(pressure2, P_bubble, sg2, api, temp2, Rsb):
 
   mu_oil_array = []
 
-  for i in range(len(pressure2)):
-    if pressure2[i] <= P_bubble:
-      if api <=30:
-        c1 = 0.0362
-        c2 = 1.0937
-        c3 = 25.7240
-      if api > 30:
-        c1 = 0.0178
-        c2 = 1.187
-        c3 = 23.9310
+  if pressure2 <= P_bubble:
+    if api <=30:
+      c1 = 0.0362
+      c2 = 1.0937
+      c3 = 25.7240
+    if api > 30:
+      c1 = 0.0178
+      c2 = 1.187
+      c3 = 23.9310
 
-      # use Beggs and Robinson
-      # valid for: 0 < pressure < 5250 psig, 70 < temp < 295 F, 20 < Rs < 2070 scf/STB, 16 < api < 58 API 
-      x = (temp2**(-1.163)) * np.exp(6.9824 - (0.04658 * api))
-      mu_dead_oil = 10**x - 1
-      Rs = (pressure2[i]**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
-      a = 10.715 * ((Rs + 100)**(-0.515))
-      b = 5.44 * ((Rs + 150)**(-0.338))
-      mu_live_oil = a * (mu_dead_oil**b)
+    # use Beggs and Robinson
+    # valid for: 0 < pressure < 5250 psig, 70 < temp < 295 F, 20 < Rs < 2070 scf/STB, 16 < api < 58 API 
+    x = (temp2**(-1.163)) * np.exp(6.9824 - (0.04658 * api))
+    mu_dead_oil = 10**x - 1
+    Rs = (pressure2**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
+    a = 10.715 * ((Rs + 100)**(-0.515))
+    b = 5.44 * ((Rs + 150)**(-0.338))
+    mu_live_oil = a * (mu_dead_oil**b)
 
-    if pressure2[i] > P_bubble:
-      if api <=30:
-        c1 = 0.0362
-        c2 = 1.0937
-        c3 = 25.7240
-      if api > 30:
-        c1 = 0.0178
-        c2 = 1.187
-        c3 = 23.9310
+  if pressure2 > P_bubble:
+    if api <=30:
+      c1 = 0.0362
+      c2 = 1.0937
+      c3 = 25.7240
+    if api > 30:
+      c1 = 0.0178
+      c2 = 1.187
+      c3 = 23.9310
 
-      # use Vazquez and Beggs
-      # valid for: 126 < pressure < 9500 psig, 9.3 < Rs < 2199 scf/STB, 15.3 < api < 59.5 API, 0.511 < sg < 1.351 
+    # use Vazquez and Beggs
+    # valid for: 126 < pressure < 9500 psig, 9.3 < Rs < 2199 scf/STB, 15.3 < api < 59.5 API, 0.511 < sg < 1.351 
 
-      # compute oil viscosity at bubblepoint first
-      x_bubble = (temp2**(-1.163)) * np.exp(6.9824 - (0.04658 * api))
-      mu_dead_oil_bubble = 10**x_bubble - 1
-      Rsb = (P_bubble**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
-      a_bubble = 10.715 * ((Rsb + 100)**(-0.515))
-      b_bubble = 5.44 * ((Rsb + 150)**(-0.338))
-      mu_live_oil_bubble = a_bubble * (mu_dead_oil**b_bubble)
+    # compute oil viscosity at bubblepoint first
+    x_bubble = (temp2**(-1.163)) * np.exp(6.9824 - (0.04658 * api))
+    mu_dead_oil_bubble = 10**x_bubble - 1
+    Rsb = (P_bubble**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
+    a_bubble = 10.715 * ((Rsb + 100)**(-0.515))
+    b_bubble = 5.44 * ((Rsb + 150)**(-0.338))
+    mu_live_oil_bubble = a_bubble * (mu_dead_oil_bubble**b_bubble)
 
-      m = 2.6 * (pressure2[i]**1.187) * np.exp(-11.513 - (8.98E-05 * pressure2[i]))
-      mu_live_oil = mu_live_oil_bubble * ((pressure2[i] / P_bubble)**m)
-    mu_oil_array.append(float(mu_live_oil))
-  return(mu_oil_array)
+    m = 2.6 * (pressure2**1.187) * np.exp(-11.513 - (8.98E-05 * pressure2))
+    mu_live_oil = mu_live_oil_bubble * ((pressure2 / P_bubble)**m)
+
+  return mu_live_oil
 
 def oil_compressibility(pressure2, P_bubble, temp2, api, Rsb, sg2):
   import numpy as np
@@ -230,39 +228,37 @@ def oil_compressibility(pressure2, P_bubble, temp2, api, Rsb, sg2):
 
   coil_array = []
 
-  for i in range(len(pressure2)):
-    if pressure2[i] < P_bubble:
-      # use McCain
-      ln_coil = -7.573 - (1.45 * np.log(pressure2[i])) - (0.383 * np.log(P_bubble)) + (1.402 * np.log(temp2)) + (0.256 * np.log(api)) + (0.449 * np.log(Rsb))  
-      coil = np.exp(ln_coil)
-    if pressure2[i] >= P_bubble:
-      # use Vazquez-Beggs
-      coil = ((5 * Rsb) + (17.2 * temp2) - (1180 * sg2) + (12.61 * api) - 1433) / (1E+05 * pressure2[i])
-    coil_array.append(float(coil))
-  return(coil_array)
+  if pressure2 < P_bubble:
+    # use McCain
+    ln_coil = -7.573 - (1.45 * np.log(pressure2)) - (0.383 * np.log(P_bubble)) + (1.402 * np.log(temp2)) + (0.256 * np.log(api)) + (0.449 * np.log(Rsb))  
+    coil = np.exp(ln_coil)
+  if pressure2 >= P_bubble:
+    # use Vazquez-Beggs
+    coil = ((5 * Rsb) + (17.2 * temp2) - (1180 * sg2) + (12.61 * api) - 1433) / (1E+05 * pressure2)
+
+  return coil
 
 
 def gasoilratio(pressure2, P_bubble, sg2, api, temp2, Rsb):
   import numpy as np
   Rs_array = []
 
-  for i in range(len(pressure2)):
-    if pressure2[i] < P_bubble:
-      if api <=30:
-        c1 = 0.0362
-        c2 = 1.0937
-        c3 = 25.7240
-      if api > 30:
-        c1 = 0.0178
-        c2 = 1.187
-        c3 = 23.9310
+  if pressure2 < P_bubble:
+    if api <=30:
+      c1 = 0.0362
+      c2 = 1.0937
+      c3 = 25.7240
+    if api > 30:
+      c1 = 0.0178
+      c2 = 1.187
+      c3 = 23.9310
 
-      Rsc = (pressure2[i]**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
-      Rs = Rsc
-    if pressure2[i] >= P_bubble:
-      Rs = Rsb
-    Rs_array.append(float(Rs))
-  return(Rs_array)
+    Rsc = (pressure2**c2) * c1 * sg2 * np.exp((c3 * api) / (temp2 + 459.67)) # gas-oil ratio at any pressure BELOW BUBBLEPOINT using Vazquez-Beggs
+    Rs = Rsc
+  if pressure2 >= P_bubble:
+    Rs = Rsb
+
+  return Rs
 
 """
 WATER
