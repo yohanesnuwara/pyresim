@@ -19,14 +19,14 @@ def gas_pseudoprops(temp, pressure, sg, x_h2s, x_co2):
 
   # calculate adjustment to pseudocritical properties for sour gas (Wiechert-Aziz, valid for x_co2<0.544 and x_h2s<0.738)
   e = (120 * (((x_h2s + x_co2)**0.9) - ((x_h2s + x_co2)**1.6))) + (15 * (x_h2s**0.5 - x_h2s**4))
-  T_pc_corr = T_pc - e # corrected T_pc
-  P_pc_corr = (P_pc * T_pc_corr) / (T_pc - x_h2s * e * (1-x_h2s))
+  T_pc = T_pc - e # corrected T_pc
+  P_pc = (P_pc * T_pc) / (T_pc - x_h2s * e * (1-x_h2s))
 
   # calculate pseudoreduced properties
-  P_pr = pressure / P_pc_corr
-  T_pr = temp / T_pc_corr
+  P_pr = pressure / P_pc
+  T_pr = temp / T_pc
 
-  return(P_pr, T_pr)
+  return(P_pc, T_pc, P_pr, T_pr)
 
 def gas_zfactor(T_pr, P_pr):
   """
@@ -74,7 +74,7 @@ def gas_fvf2(unit='unit1', z=0.8, temp=186, pressure=2000):
   if unit == 'unit2':
     return(0.350958 * z * temp / pressure)
 
-def gas_compressibility(T_pr, P_pr, rho_pr, z, P_pc_corr):
+def gas_compressibility(T_pr, P_pr, rho_pr, z, P_pc):
   import numpy as np
 
   a1 = 0.3265; a2 = -1.0700; a3 = -0.5339; a4 = 0.01569; a5 = -0.05165; a6 = 0.5475
@@ -86,7 +86,7 @@ def gas_compressibility(T_pr, P_pr, rho_pr, z, P_pc_corr):
       * ((2 * a10 * rho_pr / T_pr**3)*np.exp(-a11 * rho_pr**2))
 
   c_pr_analytical = (1 / P_pr) - ((0.27 / (z**2 * T_pr)) * (do / (1 + ((rho_pr / z) * do))))
-  cgas_analytical = c_pr_analytical / P_pc_corr
+  cgas_analytical = c_pr_analytical / P_pc
   return(cgas_analytical)           
 
 """
