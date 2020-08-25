@@ -72,7 +72,7 @@ def gas_fvf2(unit='unit1', z=0.8, temp=186, pressure=2000):
   if unit == 'unit1':
     return(0.00503676 * z * temp / pressure) 
   if unit == 'unit2':
-    return(0.350958 * z * temp / pressure
+    return(0.350958 * z * temp / pressure)
 
 def gas_compressibility(T_pr, P_pr, rho_pr, z, P_pc_corr):
   import numpy as np
