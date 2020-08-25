@@ -31,3 +31,6 @@
 
 23/08/2020
 * add simulation for elevated 1D reservoirs in `PyReSim1d.ipynb`
+
+25/08/2020
+* upload `pvt_correlations` function for PVT engine (generate reservoir fluid properties) based on correlation
