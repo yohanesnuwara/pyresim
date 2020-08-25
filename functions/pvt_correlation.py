@@ -10,6 +10,9 @@ GAS
 """
 
 def gas_pseudoprops(temp, pressure, sg, x_h2s, x_co2):
+  """
+  Temperature in Fahrenheit
+  """
   import numpy as np
   temp = temp + 459.67 # convert to Rankine
 
@@ -54,11 +57,18 @@ def gas_zfactor(T_pr, P_pr):
   solve = fsolve(f, [1, 1]) # initial guess
   return(solve[0], solve[1]) # result is density, z-factor
 
+def gas_density(temp, pressure, sg, z):
+  temp = temp + 459.67
+  R = 10.732 # gas constant in (ft3*psi)/(lb-mol*R) 
+  rhogas = (28.97 * sg * pressure) / (z * R * temp)
+  return rhogas  
+
 def gas_fvf(z, temp, pressure):
   """
-  Gas FVF calculated in oilfield unit, result in RB/scf
-  inputs temp in Rankine (Fahrenheit + 460), pressure in psia or psig
+  Gas FVF calculated in oilfield unit, result in res ft3/scf
+  inputs temp in Fahrenheit, pressure in psia or psig
   """
+  temp = temp + 459.67
   Bg = 0.0282793 * z * temp / pressure 
   return(Bg)
 
@@ -73,6 +83,19 @@ def gas_fvf2(unit='unit1', z=0.8, temp=186, pressure=2000):
     return(0.00503676 * z * temp / pressure) 
   if unit == 'unit2':
     return(0.350958 * z * temp / pressure)
+
+def gas_mu(temp, rhogas, sg):
+  """
+  Temperature in Rankine
+  """
+  temp = temp + 459.67
+  Mg = 28.97 * sg
+  rhogas_lee = rhogas * 0.0160185 # lbm/ft3 converted to gas density unit of Lee et al (g/cm3)
+  K = ((0.00094 + 2E-06)*(temp**1.5)) / (209 + 19*Mg + temp)
+  x = 3.5 + (986 / temp) + (0.01 * Mg)
+  y = 2.4 - 0.2*x  
+  viscogas = K * np.exp(x * (rhogas_lee**y))
+  return viscogas
 
 def gas_compressibility(T_pr, P_pr, rho_pr, z, P_pc):
   import numpy as np
