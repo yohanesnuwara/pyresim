@@ -88,6 +88,7 @@ def gas_mu(temp, rhogas, sg):
   """
   Temperature in Rankine
   """
+  import numpy as np
   temp = temp + 459.67
   Mg = 28.97 * sg
   rhogas_lee = rhogas * 0.0160185 # lbm/ft3 converted to gas density unit of Lee et al (g/cm3)
