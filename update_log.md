@@ -34,3 +34,7 @@
 
 25/08/2020
 * upload `pvt_correlation` function for PVT engine (generate reservoir fluid properties) based on correlation
+
+28/08/2020
+* add elevation element to 1d and 2d simulation
+* elevated reservoir simulation PASS the benchmark test !!
