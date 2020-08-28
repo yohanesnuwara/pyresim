@@ -87,3 +87,32 @@ def constant_depth1d(z, xi):
   z = np.full(xi, z)
   z_array = np.array([x, z])
   return z_array  
+
+def create_depth2d(reservoir_input, model='horizontal', z=3000):
+  """
+  Create constant depth of 2D reservoir
+
+  Input:
+  model = option of models: 'horizontal', 'dipping_to_north', 'anticline'
+  reservoir_input = reservoir data dictionary
+  z = depth of grid blocks (only for model 'horizontal')
+
+  Output:
+  z_array = depth of grid blocks (2D array)
+  """
+  import numpy as np
+
+  xi = reservoir_input['xi']
+  yi = reservoir_input['yi']
+  x, y = np.meshgrid(np.arange(1, xi+1), np.arange(1, yi+1), indexing='ij')  
+
+  if model=='horizontal':
+    z_array = np.array([[z]*yi]*xi)
+  
+  if model=='dipping_to_north':
+    z_array = 0.5 * (100 * y + 1000) 
+
+  if model=='anticline':
+    z_array = ((x**2)-(y**2)) + 3001 # anticlinal reservoir    
+
+  return z_array 
