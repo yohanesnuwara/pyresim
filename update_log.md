@@ -38,3 +38,4 @@
 28/08/2020
 * add elevation element to 1d and 2d simulation
 * elevated reservoir simulation PASS the benchmark test !!
+* add `create_depth2d` and `potential_term2d` functions
