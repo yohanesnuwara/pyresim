@@ -46,6 +46,10 @@ These is a list contains several options for contributions:
 
 Let's make PyReSim better together. If you're confident to contribute, please let me know and [mail me](ign.nuwara97@gmail.com)
 
+### List of our collaborators:
+
+* Mohammed Saif ([@mohammedsaif38](https://github.com/mohammedsaif38))
+
 ## License
 
 The author chooses Creative Commons BY-NC-ND 4.0 International to license this work. Please read what's permitted and what's not permitted [here](https://github.com/yohanesnuwara/pyresim/blob/master/LICENSE.md)
