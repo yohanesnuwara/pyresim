@@ -5,3 +5,27 @@ RUNSPEC
 TITLE
 PyReSim
 
+DIMENS
+-- NX NY NZ
+   35 35 1  /
+
+-- Phases
+ OIL
+ WATER
+ GAS
+ DISGAS
+
+-- Units
+ FIELD
+
+ UNIFIN
+ UNIFOUT
+
+-- Wells
+ WELLDIMS
+ 6 1 2 5 /
+
+-- Aquifer direction (Connected to Eastern side of the reservoir)
+ AQUDIMS
+ 1* 1 35 / 
+
