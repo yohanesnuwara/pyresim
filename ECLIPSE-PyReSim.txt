@@ -29,3 +29,20 @@ DIMENS
  AQUDIMS
  1* 1 35 / 
 
+
+-- Fault
+FAULTDIM
+ 35 /
+
+
+GRID
+
+DX
+   1225*300 /
+DY
+   1225*300 /
+DZ
+   1225*50 /
+
+PORO
+ 1225*25 /
