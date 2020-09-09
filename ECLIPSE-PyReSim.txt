@@ -46,3 +46,17 @@ DZ
 
 PORO
  1225*25 /
+ 
+ -- Permeability in X,Y and Z
+PERMX
+  1225*100 /
+PERMY
+  1225*100 /
+PERMZ
+  1225*100 /
+
+INIT
+
+-- Displaying the follwoing after simulation run
+RPTGRID
+DX DY DZ FAULTS PERMX PERMY PERMZ PORO PORV /
