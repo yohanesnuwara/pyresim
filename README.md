@@ -8,7 +8,7 @@
   <img width="400" height="250" src="https://user-images.githubusercontent.com/51282928/91322826-60c35900-e7ea-11ea-8e5e-102a0f1a0f79.png">
 </p>
 
-> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in November 2020). See my progress bar to keep updated, stay tuned!
+> This repository is still worked on. However, each week or so, there will be a teaser posted in my LinkedIn, about one reservoir simulation case and how PyReSim is used to solve. It will be scheduled for launch once all simulators have been set up and complete (scheduled in 2021). See my progress bar to keep updated, stay tuned!
 
 ## Aspects simulated in *PyReSim*
 
@@ -22,7 +22,7 @@
 |Reservoir fluid types|Single-phase incompressible fluid (brine), slightly-compressible fluid (undersaturated oil), compressible fluid (gas); Multi-phase reservoir (brine-oil-gas)|
 |Solver methods|Matrix inversion (very 3x basic method); explicit; implicit; Crank-Nicholson; many more. |
 
-> (*) These aspects are still not available on the first launch (in November 2020). It will be available on the second launch (afterwards). 
+> (*) These aspects are still not available on the first launch (in 2021). It will be available on the second launch (afterwards). 
 
 ## Teasers
 
