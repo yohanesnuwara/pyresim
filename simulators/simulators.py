@@ -246,10 +246,15 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   # merge the initial pressure to the solved pressure afterwards
   p_initial_ = p_initial.reshape((1,1,xi))
   p_sol_ = np.concatenate((p_initial_, p_sol_), axis=0)
+  
+  return p_sol_
 
+def plot_simulation_1d_cylindrical(p_sol_):
   """""""""""
   INTERACTIVE ANIMATION
   """""""""""
+  import numpy as np
+  import matplotlib.pyplot as plt
 
   min, max = np.round(np.amin(p_sol_)), np.round(np.amax(p_sol_))
 
@@ -264,8 +269,8 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
 
     Z = np.concatenate((p_sol_[day], p_sol_[day]), axis=0)
 
-    # im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0.005, vmin=min, vmax=max)
-    im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0.005, vmin=np.amin(p_sol_), vmax=np.amax(p_sol_))
+    im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0, vmin=min, vmax=max)
+#     im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0.005, vmin=np.amin(p_sol_), vmax=np.amax(p_sol_))
 
     ax.set_title('Pressure at day {}'.format(day))
     cax = fig.add_axes([0.1, -0.2, 0.8, 0.05])
