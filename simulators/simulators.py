@@ -1,4 +1,4 @@
-def run_simulation_1d_cylindrical(dz, poro, kx, rho, B, mu, cpore, cfluid, dw, re, 
+def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, dw, re, 
                                   inner_boundary, outer_boundary, well_value,
                                   p_initial, timestep, schedule):
   """
