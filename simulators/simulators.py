@@ -249,7 +249,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   
   return p_sol_
 
-def plot_simulation_1d_cylindrical(p_sol_, extent=(0,20,0,1), cmap="plasma"):
+def plot_simulation_1d_cylindrical(p_sol_, extent=(0,20,0,1), cmap="plasma", linewidths=0):
   """
   INTERACTIVE ANIMATION
   """
@@ -269,7 +269,7 @@ def plot_simulation_1d_cylindrical(p_sol_, extent=(0,20,0,1), cmap="plasma"):
 
     Z = np.concatenate((p_sol_[day], p_sol_[day]), axis=0)
 
-    im = ax.pcolormesh(X, Y, Z, extent=extent, edgecolors='k', linewidths=0, vmin=min, vmax=max, cmap=cmap)
+    im = ax.pcolormesh(X, Y, Z, extent=extent, edgecolors='k', linewidths=linewidths, vmin=min, vmax=max, cmap=cmap)
 #     im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0.005, vmin=np.amin(p_sol_), vmax=np.amax(p_sol_))
 
     ax.set_title('Pressure at day {}'.format(day))
