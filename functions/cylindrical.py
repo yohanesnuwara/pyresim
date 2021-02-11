@@ -211,6 +211,7 @@ def trans_r_min(dz_now, dz_prev, dtheta, alpha_tg, kh_now, kh_prev, mu, B):
   """
   Calculate transmissibility of cylindrical grid in r- direction
   """
+  import numpy as np
   # transmissibility geometric factor
   G_trans_r_min = (.001127 * dtheta) / (np.log(alpha_tg * np.log(alpha_tg) / (alpha_tg - 1)) / (dz_now * kh_now) + np.log((alpha_tg - 1) / np.log(alpha_tg)) / (dz_prev * kh_prev))
   # calculate transmissibility
