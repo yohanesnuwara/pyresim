@@ -9,8 +9,8 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   import pandas as pd
 
   # from __future__ import print_function
-  from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
-  import ipywidgets as widgets  
+#   from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
+#   import ipywidgets as widgets  
 
   from cylindrical import boundary_floweq1d_cylindrical, calculate_bulk_cylindrical, horizontal_permeability, lhs_coeffs1d_cylindrical, rhs_constant1d_cylindrical, trans_r_min, trans_r_plus, transmissibility1d_boundary_cylindrical, transmissibility2d_boundary_cylindrical, transmissibility_inner_boundary1d
 
@@ -255,6 +255,9 @@ def plot_simulation_1d_cylindrical(p_sol_, extent=(0,20,0,1), cmap="plasma", lin
   """
   import numpy as np
   import matplotlib.pyplot as plt
+  
+  from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
+  import ipywidgets as widgets  
 
   min, max = np.round(np.amin(p_sol_)), np.round(np.amax(p_sol_))
 
