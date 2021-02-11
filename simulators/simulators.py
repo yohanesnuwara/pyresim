@@ -1,6 +1,8 @@
 def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, dw, re, 
                                   inner_boundary, outer_boundary, well_value,
-                                  p_initial, timestep, schedule):
+                                  p_initial, timestep, schedule,
+                                  plot_attributes = dict({"cmap": "plasma", "linewidths": 0,
+                                                          "xlim": None})):
   """
   1D Reservoir Simulation in Cylindrical Grids
   """
@@ -9,8 +11,8 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   import pandas as pd
 
   # from __future__ import print_function
-#   from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
-#   import ipywidgets as widgets  
+  from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
+  import ipywidgets as widgets  
 
   from cylindrical import boundary_floweq1d_cylindrical, calculate_bulk_cylindrical, horizontal_permeability, lhs_coeffs1d_cylindrical, rhs_constant1d_cylindrical, trans_r_min, trans_r_plus, transmissibility1d_boundary_cylindrical, transmissibility2d_boundary_cylindrical, transmissibility_inner_boundary1d
 
@@ -247,38 +249,36 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   p_initial_ = p_initial.reshape((1,1,xi))
   p_sol_ = np.concatenate((p_initial_, p_sol_), axis=0)
   
-  return p_sol_
-
-def plot_simulation_1d_cylindrical(p_sol_, schedule, extent=(0,20,0,1), cmap="plasma", linewidths=0):
   """
   INTERACTIVE ANIMATION
   """
-  import numpy as np
-  import matplotlib.pyplot as plt
-  
-  from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
-  import ipywidgets as widgets  
 
   min, max = np.round(np.amin(p_sol_)), np.round(np.amax(p_sol_))
+  cmap, linewidths, xlim = plot_attributes["cmap"], plot_attributes["linewidths"], plot_attributes["xlim"]
+
+  DZ = dz[0][0] # reservoir net thickness
+  day = widgets.IntSlider(value=0, min=0, max=schedule)
 
   @interact
-
-  def display_pressure(day=(0, schedule)):
+  def display_pressure(day=day):
     fig, ax = plt.subplots(figsize=(20,2)) 
 
-    x = rn 
-    y = np.array([0,1])
-    X,Y = np.meshgrid(x,y)
+    X = np.concatenate(([0.], rn))
+    Y = np.array([-DZ, 0, DZ])
+    Z = np.vstack((p_sol_[day], p_sol_[day]))
 
-    Z = np.concatenate((p_sol_[day], p_sol_[day]), axis=0)
+    im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=linewidths, vmin=min, vmax=max, cmap=cmap)
 
-    im = ax.pcolormesh(X, Y, Z, extent=extent, edgecolors='k', linewidths=linewidths, vmin=min, vmax=max, cmap=cmap)
-#     im = ax.pcolormesh(X, Y, Z, edgecolors='k', linewidths=0.005, vmin=np.amin(p_sol_), vmax=np.amax(p_sol_))
+    ax.set_title('Pressure at day {}'.format(day), size=15, pad=10)
+    ax.set_ylim(0, DZ)
+    ax.set_xlabel("Radial Distance from Wellbore [ft]", size=10)
+    ax.set_ylabel("Res. Thickness [ft]", size=10)
 
-    ax.set_title('Pressure at day {}'.format(day))
+    if xlim!=None:
+      ax.set_xlim(xlim)
+
+    # Colorbar handler
     cax = fig.add_axes([0.1, -0.2, 0.8, 0.05])
     fig.colorbar(im, cax=cax, orientation='horizontal')
-
-    ax.set_xlim(0,20)
-
-    plt.show()
+  
+  return p_sol_
