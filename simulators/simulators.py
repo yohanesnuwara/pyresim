@@ -40,6 +40,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
                     'xi': xi}
 
   # create block coordinates (Engineering Notation convention in Abou-Kassem)
+  zi = 1
   x_ = np.arange(1, xi+1)
   z_ = np.arange(1, zi+1)
 
