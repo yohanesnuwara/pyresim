@@ -249,7 +249,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   
   return p_sol_
 
-def plot_simulation_1d_cylindrical(p_sol_, extent=(0,20,0,1), cmap="plasma", linewidths=0):
+def plot_simulation_1d_cylindrical(p_sol_, schedule, extent=(0,20,0,1), cmap="plasma", linewidths=0):
   """
   INTERACTIVE ANIMATION
   """
