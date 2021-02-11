@@ -30,6 +30,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   """""""""""
 
   west, east = inner_boundary, outer_boundary
+  well_loc = np.array([1])
 
   # Calculate spacing from re, because simulator only accepts spacing
   spacing = np.pi * (re**2)
