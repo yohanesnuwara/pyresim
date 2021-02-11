@@ -12,7 +12,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
   import ipywidgets as widgets  
 
-  # from cylindrical import *
+  from cylindrical import *
 
   from input_output import read_input, read_depth
   from boundary import boundary_floweq1d
