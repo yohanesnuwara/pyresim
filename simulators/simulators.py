@@ -12,7 +12,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   from ipywidgets import interact, interactive, fixed, interact_manual, ToggleButtons
   import ipywidgets as widgets  
 
-  from cylindrical import *
+  from cylindrical boundary_floweq1d_cylindrical, calculate_bulk_cylindrical, horizontal_permeability, lhs_coeffs1d_cylindrical, rhs_constant1d_cylindrical, trans_r_min, trans_r_plus, transmissibility1d_boundary_cylindrical, transmissibility2d_boundary_cylindrical, transmissibility_inner_boundary1d
 
   from input_output import read_input, read_depth
   from boundary import boundary_floweq1d
