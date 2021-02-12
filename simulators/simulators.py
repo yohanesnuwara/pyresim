@@ -64,6 +64,7 @@ def run_simulation_1d_cylindrical(xi, dz, poro, kx, rho, B, mu, cpore, cfluid, d
   B = np.array([[B]*zi]*xi)
   mu = np.array([[mu]*zi]*xi)
   rho = np.array([[rho]*zi]*xi)
+  p_initial = np.full(xi, p_initial)
 
   # source block (production or injection well)
   qsc = source1d(well_value, well_loc, xi)  # call function HERE
